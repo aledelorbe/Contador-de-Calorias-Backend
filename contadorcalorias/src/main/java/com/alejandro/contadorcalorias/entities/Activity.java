@@ -1,7 +1,13 @@
 package com.alejandro.contadorcalorias.entities;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import org.springframework.data.annotation.Id;
+
+@Document(collection = "activities")
 public class Activity {
 
+    @Id
     private String id;
 
     private String category;
