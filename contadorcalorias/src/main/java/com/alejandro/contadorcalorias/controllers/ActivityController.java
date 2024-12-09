@@ -13,10 +13,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@RestController
-@RequestMapping("/api/activities")
+@RestController // To create a api rest.
+@RequestMapping("/api/activities") // To create a base path.
 public class ActivityController {
     
+    // To Inject the service dependency
     @Autowired
     private ActivityService activityService;
 

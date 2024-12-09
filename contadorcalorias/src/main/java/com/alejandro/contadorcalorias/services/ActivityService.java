@@ -1,15 +1,19 @@
 package com.alejandro.contadorcalorias.services;
 
 import java.util.List;
+import java.util.Optional;
 
-import org.springframework.stereotype.Service;
 import com.alejandro.contadorcalorias.entities.Activity;
 
-@Service
 public interface ActivityService {
+    
+    // Declaration of methods to use in 'serviceImp' file
+    
+    public List<Activity> findAll();
     
     public void save(Activity activity);
 
-    public List<Activity> findAll();
+    public Optional<Activity> findById(String id);
 
+    public void deleteById(String id);
 }

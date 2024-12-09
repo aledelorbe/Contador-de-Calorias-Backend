@@ -1,12 +1,15 @@
 package com.alejandro.contadorcalorias.entities;
 
 import org.springframework.data.mongodb.core.mapping.Document;
-
 import org.springframework.data.annotation.Id;
 
+// To specific the name of collection in mongoDb
+// In mongoDb the name of this collection is 'activities' but in this project 
+// the name of this class is 'Activity'
 @Document(collection = "activities")
 public class Activity {
 
+    // Mapping of class attributes with collection fields in mongoDb
     @Id
     private String id;
 
