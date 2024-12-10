@@ -65,6 +65,7 @@ public class ActivityController {
         return ResponseEntity.status(HttpStatus.CREATED).body(newActivity);
     }
 
+    // To create an endpoint that allows update all of atributte values a specific activity based its id.
     @PutMapping("/activity/{id}")
     public ResponseEntity<?> updateActivity(@Valid @RequestBody Activity activity, BindingResult result, @PathVariable String id) {
         // To handle of obligations of object attributes
@@ -82,6 +83,7 @@ public class ActivityController {
         return ResponseEntity.notFound().build();
     }
 
+    // To create an endpoint that allows deleting a specific activity based its id.
     @DeleteMapping("/activity/{id}")
     public ResponseEntity<?> deleteActivity(@PathVariable String id) {
         // Find specific activity and if it's present then return specific activity
@@ -91,6 +93,13 @@ public class ActivityController {
         }
         // Else return code response 404 
         return ResponseEntity.notFound().build();
+    }
+
+    // To create a endpoint that allows deleting all of activities
+    @DeleteMapping("/activities")
+    public ResponseEntity<?> deleteAllOfActivity() {
+        service.deleteAll();
+        return ResponseEntity.ok().build();
     }
 
     // To send a JSON object with messages about the obligations of object attributes

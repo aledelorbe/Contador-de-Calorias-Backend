@@ -74,4 +74,11 @@ public class ActivityServiceImp implements ActivityService{
 
         return optionalActivity;
     }
+
+    // To delete all of activities
+    @Override
+    @Transactional
+    public void deleteAll() {
+        repository.deleteAll();
+    }
 }
