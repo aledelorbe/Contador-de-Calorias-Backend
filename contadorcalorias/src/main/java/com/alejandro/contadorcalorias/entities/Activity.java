@@ -1,6 +1,10 @@
 package com.alejandro.contadorcalorias.entities;
 
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+
 import org.springframework.data.annotation.Id;
 
 // To specific the name of collection in mongoDb
@@ -13,10 +17,13 @@ public class Activity {
     @Id
     private String id;
 
+    @NotBlank // To obligate to this attribute has no empty or blank values. 
     private String category;
 
+    @NotBlank // To obligate to this attribute has no empty or blank values. 
     private String name;
 
+    @Min(1) // To obligate this attribute to contain values ​​equal to or greater than one
     private int calories;
 
     public Activity() {
