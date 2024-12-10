@@ -42,9 +42,12 @@ public class ActivityServiceImp implements ActivityService{
     @Override
     @Transactional
     public Optional<Activity> update(String id, Activity activity) {
+        // Find a specific activity 
         Optional<Activity> optionalActivity = repository.findById(id);
         
+        // If the activity is present then...
         if( optionalActivity.isPresent() ) {
+            // update that record and return an optional value
             Activity activityDb = optionalActivity.get();
 
             activityDb.setName(activity.getName());
@@ -61,8 +64,10 @@ public class ActivityServiceImp implements ActivityService{
     @Override
     @Transactional
     public Optional<Activity> delete(String id) {
+        // Find a specific activity 
         Optional<Activity> optionalActivity = repository.findById(id);
         
+        // If the activity is present then delete that activity
         optionalActivity.ifPresent(activityDb -> {
             repository.deleteById(id);
         });
