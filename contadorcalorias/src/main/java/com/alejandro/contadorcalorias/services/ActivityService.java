@@ -11,9 +11,11 @@ public interface ActivityService {
     
     public List<Activity> findAll();
     
-    public void save(Activity activity);
-
     public Optional<Activity> findById(String id);
+    
+    public Activity save(Activity activity);
 
-    public void deleteById(String id);
+    public Optional<Activity> update(String id, Activity activity);
+
+    public Optional<Activity> delete(String id);
 }

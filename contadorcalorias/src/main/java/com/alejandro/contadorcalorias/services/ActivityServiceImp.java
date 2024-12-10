@@ -24,13 +24,6 @@ public class ActivityServiceImp implements ActivityService{
         return repository.findAll();
     }
 
-    // To save a new activity in the db
-    @Override
-    @Transactional
-    public void save(Activity activity){
-        repository.save(activity);
-    }
-
     // To get a specific activity based on its id
     @Override
     @Transactional
@@ -38,10 +31,42 @@ public class ActivityServiceImp implements ActivityService{
         return repository.findById(id);
     }
 
+    // To save a new activity in the db
+    @Override
+    @Transactional
+    public Activity save(Activity activity){
+        return repository.save(activity);
+    }
+
+    // To update a specific activity based on its id
+    @Override
+    @Transactional
+    public Optional<Activity> update(String id, Activity activity) {
+        Optional<Activity> optionalActivity = repository.findById(id);
+        
+        if( optionalActivity.isPresent() ) {
+            Activity activityDb = optionalActivity.get();
+
+            activityDb.setName(activity.getName());
+            activityDb.setCalories(activity.getCalories());
+            activityDb.setCategory(activity.getCategory());
+
+            return Optional.ofNullable(repository.save(activityDb));
+        }
+
+        return optionalActivity;
+    }
+
     // To delete a specific activity based on its id
     @Override
     @Transactional
-    public void deleteById(String id) {
-        repository.deleteById(id);        
+    public Optional<Activity> delete(String id) {
+        Optional<Activity> optionalActivity = repository.findById(id);
+        
+        optionalActivity.ifPresent(activityDb -> {
+            repository.deleteById(id);
+        });
+
+        return optionalActivity;
     }
 }
