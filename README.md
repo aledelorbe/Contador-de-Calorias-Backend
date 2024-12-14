@@ -21,6 +21,7 @@ El proyecto **Contador de Calorías** es una aplicación backend desarrollada co
     - Eliminar actividades individuales.
     - Reinicio del servidor: Consiste en eliminar todas las actividades de la base de datos.
 - Integración con MongoDB para la manipulación de datos.
+- La base de datos NoSQL cuenta con una unica coleccion, la cual gestiona la información de las actividades.
 - Validación de datos de entrada. Se emplean las siguientes validaciones:
     - No se permite que los atributos **nombre** y **categoría** de la actividad se reciban vacíos o con puros espacios en blanco.
     - No se permite que el atributo **calorías** se reciba con un valor menor o igual a cero.
