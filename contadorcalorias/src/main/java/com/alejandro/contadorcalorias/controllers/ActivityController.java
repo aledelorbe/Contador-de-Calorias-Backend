@@ -39,15 +39,15 @@ public class ActivityController {
         return service.findAll();
     }
 
-    // To create an endpoint that allows invocating the method findAll.
+    // To create an endpoint that allows invocating the method fingById.
     @GetMapping("/activity/{id}")
     public ResponseEntity<?> activity(@PathVariable String id) {
-        // Find specific activity and if it's present then return specific activity
+        // Search a specific activity and if it's present then return it.
         Optional<Activity> optionalActivity = service.findById(id);
         if( optionalActivity.isPresent() ) {
             return ResponseEntity.ok(optionalActivity.orElseThrow());
         }
-        // Else return code response 404 
+        // Else returns code response 404 
         return ResponseEntity.notFound().build();
     }
 
@@ -55,7 +55,7 @@ public class ActivityController {
     // The annotation called 'RequestBody' allows receiving data of a client
     @PostMapping("/activity")
     public ResponseEntity<?> saveActivity(@Valid @RequestBody Activity activity, BindingResult result) {
-        // To handle of obligations of object attributes
+        // To handle the obligations of object attributes
         if( result.hasFieldErrors() ){
             return validation(result);
         } 
@@ -87,7 +87,7 @@ public class ActivityController {
     @DeleteMapping("/activity/{id}")
     public ResponseEntity<?> deleteActivity(@PathVariable String id) {
         // Find specific activity and if it's present then return specific activity
-        Optional<Activity> optionalActivity = service.delete(id);
+        Optional<Activity> optionalActivity = service.deleteById(id);
         if( optionalActivity.isPresent() ) {
             return ResponseEntity.ok(optionalActivity.orElseThrow());
         }
@@ -96,13 +96,14 @@ public class ActivityController {
     }
 
     // To create a endpoint that allows deleting all of activities
+    // and return response ok
     @DeleteMapping("/activities")
     public ResponseEntity<?> deleteAllOfActivity() {
         service.deleteAll();
         return ResponseEntity.ok().build();
     }
 
-    // To send a JSON object with messages about the obligations of object attributes
+    // To send a JSON object with messages about the obligations of each object attribute
     private ResponseEntity<?> validation(BindingResult result) {
         Map<String, String> errors = new HashMap<>();
 

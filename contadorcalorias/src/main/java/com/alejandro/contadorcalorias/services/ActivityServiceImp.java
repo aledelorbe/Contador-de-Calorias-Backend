@@ -63,8 +63,8 @@ public class ActivityServiceImp implements ActivityService{
     // To delete a specific activity based on its id
     @Override
     @Transactional
-    public Optional<Activity> delete(String id) {
-        // Find a specific activity 
+    public Optional<Activity> deleteById(String id) {
+        // Search a specific activity 
         Optional<Activity> optionalActivity = repository.findById(id);
         
         // If the activity is present then delete that activity

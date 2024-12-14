@@ -17,7 +17,7 @@ public interface ActivityService {
 
     public Optional<Activity> update(String id, Activity activity);
 
-    public Optional<Activity> delete(String id);
+    public Optional<Activity> deleteById(String id);
 
     public void deleteAll();
 }

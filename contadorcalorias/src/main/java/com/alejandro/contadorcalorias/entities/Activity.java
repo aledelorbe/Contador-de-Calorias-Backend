@@ -17,10 +17,10 @@ public class Activity {
     @Id
     private String id;
 
-    @NotBlank // To obligate to this attribute has no empty or blank values. 
+    @NotBlank // To obligate to this attribute not to empty or blank values.
     private String category;
 
-    @NotBlank // To obligate to this attribute has no empty or blank values. 
+    @NotBlank // To obligate to this attribute not to empty or blank values.
     private String name;
 
     @Min(1) // To obligate this attribute to contain values ​​equal to or greater than one
