@@ -26,7 +26,7 @@ public class ActivityServiceImp implements ActivityService{
 
     // To get a specific activity based on its id
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public Optional<Activity> findById(String id) {
         return repository.findById(id);
     }
@@ -42,7 +42,7 @@ public class ActivityServiceImp implements ActivityService{
     @Override
     @Transactional
     public Optional<Activity> update(String id, Activity activity) {
-        // Find a specific activity 
+        // Search for a specific activity 
         Optional<Activity> optionalActivity = repository.findById(id);
         
         // If the activity is present then...

@@ -1,0 +1,151 @@
+{
+	"info": {
+		"_postman_id": "08c0736c-cfc8-4f83-a383-e47f570f2f51",
+		"name": "calorie counter",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15966177"
+	},
+	"item": [
+		{
+			"name": "activities",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/api/activities",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"activities"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "activity",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/activity",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"activity"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "activity",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/api/activity/6758971b8f617f46c0c5db7a",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"activity",
+						"6758971b8f617f46c0c5db7a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "activity",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"category\": \"ejercicio\",\r\n    \"name\": \"curl martillo\",\r\n    \"calories\": 480\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/activity/6758971b8f617f46c0c5db7a",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"activity",
+						"6758971b8f617f46c0c5db7a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "activity",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/api/activity/6758971b8f617f46c0c5db7a",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"activity",
+						"6758971b8f617f46c0c5db7a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "activities",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/api/activities",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"activities"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

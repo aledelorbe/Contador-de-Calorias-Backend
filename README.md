@@ -5,26 +5,26 @@ El proyecto **Contador de Calorías** es una aplicación backend desarrollada co
 ## Tecnologías Utilizadas
 
 - **Spring Boot**: Framework para construir aplicaciones Java. Particularmente en este proyecto se utiliza la versión `3.4.0`.
+  - **Jakarta Validation**: Validación de datos de entrada.
 - **Java**: Lenguaje de programación principal. Para este proyecto en específico se utilizó el `JDK 17`.
 - **Maven**: Para la gestión de dependencias y construcción del proyecto.
-- **Jakarta Validation**: Validación de datos de entrada.
 - **MongoDB**: Base de datos NoSQL para almacenar las actividades.
 - **Postman**: Para simular ser un cliente que hace peticiones al servidor y probar los endpoints.
 
 ## Características 
 
 - API REST con rutas organizadas para interactuar con actividades. Operaciones soportadas:
-    - Listar todas las actividades.
-    - Obtener una actividad específica por su ID.
-    - Crear nuevas actividades. Para ello se debe ingresar el nombre, categoría y cantidad de calorías de una actividad.
-    - Actualizar actividades existentes.
-    - Eliminar actividades individuales.
-    - Reinicio del servidor: Consiste en eliminar todas las actividades de la base de datos.
+  - Listar todas las actividades.
+  - Obtener una actividad específica por su ID.
+  - Crear nuevas actividades. Para ello se debe ingresar el nombre, categoría y cantidad de calorías de una actividad.
+  - Actualizar actividades existentes.
+  - Eliminar actividades individuales.
+  - Reinicio del servidor: Consiste en eliminar todas las actividades de la base de datos.
 - Integración con MongoDB para la manipulación de datos.
 - La base de datos NoSQL cuenta con una unica coleccion, la cual gestiona la información de las actividades.
 - Validación de datos de entrada. Se emplean las siguientes validaciones:
-    - No se permite que los atributos **nombre** y **categoría** de la actividad se reciban vacíos o con puros espacios en blanco.
-    - No se permite que el atributo **calorías** se reciba con un valor menor o igual a cero.
+  - No se permite que los atributos **nombre** y **categoría** de la actividad se reciban vacíos o con puros espacios en blanco.
+  - No se permite que el atributo **calorías** se reciba con un valor menor o igual a cero.
 - Se emplea el patrón de diseño arquitectónico conocido como **MVC**, para separar en diferentes capas el código del proyecto.
 
 ## Estructura del Proyecto
@@ -49,25 +49,25 @@ The **Calorie Counter** project is a backend application developed with **Spring
 ## Technologies Used
 
 - **Spring Boot**: Framework for building Java applications. This project uses version `3.4.0`.
+  - **Jakarta Validation**: For input data validation.
 - **Java**: Main programming language. This project specifically uses `JDK 17`.
 - **Maven**: For dependency management and project building.
-- **Jakarta Validation**: For input data validation.
 - **MongoDB**: NoSQL database used to store the activities.
 - **Postman**: Used to simulate a client making requests to the server and to test the endpoints.
 
 ## Features 
 
 - REST API with organized routes to interact with activities. Supported operations include:
-    - List all activities.
-    - Retrieve a specific activity by its ID.
-    - Create new activities. To do this, you must provide the activity's name, category, and calorie count.
-    - Update existing activities.
-    - Delete individual activities.
-    - Reset the server: This operation deletes all activities from the database.
+  - List all activities.
+  - Retrieve a specific activity by its ID.
+  - Create new activities. To do this, you must provide the activity's name, category, and calorie count.
+  - Update existing activities.
+  - Delete individual activities.
+  - Reset the server: This operation deletes all activities from the database.
 - Integration with MongoDB for data management.
 - Input data validation. The following validations are applied:
-    - The **name** and **category** attributes of the activity cannot be empty or consist only of whitespace.
-    - The **calories** attribute must be greater than zero.
+  - The **name** and **category** attributes of the activity cannot be empty or consist only of whitespace.
+  - The **calories** attribute must be greater than zero.
 - Uses the **MVC** architectural design pattern to separate the project code into different layers.
 
 ## Project Structure
