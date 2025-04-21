@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-ContadorcaloriasApplication<contadorcalorias>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.alejandro.contadorcalorias.ContadorcaloriasApplication",
+            "projectName": "contadorcalorias",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

@@ -1,0 +1,33 @@
+package com.alejandro.contadorcalorias.services;
+
+import java.util.Set;
+
+import org.mockito.ArgumentMatcher;
+
+class CustomCondition implements ArgumentMatcher<String> {
+
+    private String argument;
+    private final Set<String> idsValid;
+    private final boolean matchIfInSet;
+
+    public CustomCondition(Set<String> idsValid, boolean matchIfInSet) {
+        this.idsValid = idsValid;
+        this.matchIfInSet = matchIfInSet;
+    }
+
+    // To create a custom condition
+    @Override
+    public boolean matches(String argument) {
+        this.argument = argument; // init the argument
+        // Check if the id is valid or not
+        return matchIfInSet ? idsValid.contains(argument) : !idsValid.contains(argument);
+    }
+
+    // To create and show a custom message when the condition is not completed
+    @Override
+    public String toString() {
+        return matchIfInSet 
+            ? "You used the value: " + argument + " but You must use an existing id" 
+            : "You used the value: " + argument + " but You must use an inexisting id";
+    }
+}

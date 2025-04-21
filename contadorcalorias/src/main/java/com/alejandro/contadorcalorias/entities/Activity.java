@@ -29,6 +29,13 @@ public class Activity {
     public Activity() {
     }
 
+    public Activity(String id, @NotBlank String category, @NotBlank String name, @Min(1) int calories) {
+        this.id = id;
+        this.category = category;
+        this.name = name;
+        this.calories = calories;
+    }
+
     public String getId() {
         return id;
     }
