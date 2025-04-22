@@ -1,6 +1,7 @@
 package com.alejandro.contadorcalorias.services;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.Mockito.*;
@@ -8,11 +9,9 @@ import static org.mockito.Mockito.*;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
-import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentMatcher;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -52,13 +51,12 @@ class ActivityServiceImpTest {
         verify(repository).findAll();
     }
 
-    // To test the metod findById
+    // To test the metod findById when we use an existing id
     @Test
-    void findByIdTest() {
+    void findByIdExistingIdTest() {
 
-        Set<String> idsValid = Set.of("0000001", "0000002", "0000003", "0000004");
+        // Set<String> idsValid = Set.of("0000001", "0000002", "0000003", "0000004");
 
-        // With an existing object ---------------------------------
         // Step: Given
         when(repository.findById(anyString())).thenReturn(Optional.of(Data.createActivity004()));
 
@@ -72,9 +70,13 @@ class ActivityServiceImpTest {
         assertEquals("Pambazos", optionalActivity.get().getName());
         assertEquals(800, optionalActivity.get().getCalories());
         
-        verify(repository).findById(argThat(new CustomCondition(idsValid, true)));
+        verify(repository).findById(argThat(new CustomCondition(Data.idsValid, true)));
+    }
 
-        // With an inexisting object ---------------------------------
+    // To test the metod findById when we use an inexisting id
+    @Test
+    void findByIdInexistingIdTest() {
+
         // Step: Given
         when(repository.findById(anyString())).thenReturn(Optional.empty());
 
@@ -87,11 +89,113 @@ class ActivityServiceImpTest {
             optionalActivity2.orElseThrow();
         });
 
-        verify(repository).findById(argThat(new CustomCondition(idsValid, false)));
+        verify(repository).findById(argThat(new CustomCondition(Data.idsValid, false)));
+    }
+    
+    // To test the metod save
+    @Test
+    void saveTest() {
+
+        // Step: Given
+        Activity activityInsert = new Activity(null, "comida", "tacos", 620);
+        when(repository.save(any(Activity.class))).thenReturn(Data.createActivity001());
         
-        verify(repository, times(2)).findById(anyString());
+        // Step: when
+        Activity newActivity = service.save(activityInsert);
+        
+        // Step: then
+        assertEquals("0000001", newActivity.getId());
+        assertEquals("ejercicio", newActivity.getCategory());
+        assertEquals("curl martillo", newActivity.getName());
+        assertEquals(500, newActivity.getCalories());
+
+        verify(repository).save(any(Activity.class));
     }
 
-     
+    // To test the metod update when we use an existing id
+    @Test
+    void updateExistingIdTest() {
+
+        // Given
+        String idToUpdate = "0000001";
+        Activity activityToUpdate = new Activity(null, "ejercicio", "activity update", 400);
+        when(repository.findById(anyString())).thenReturn(Optional.of(Data.createActivity001()));
+        when(repository.save(any(Activity.class))).thenAnswer(invocation -> invocation.getArgument(0));
+
+        // When
+        Optional<Activity> result = service.update(idToUpdate, activityToUpdate);
+
+        // Then
+        assertTrue(result.isPresent());
+        assertEquals("activity update", result.get().getName());
+        assertEquals(400, result.get().getCalories());
+        assertEquals("ejercicio", result.get().getCategory());
+
+        verify(repository).findById(argThat(new CustomCondition(Data.idsValid, true)));
+        verify(repository).save(any(Activity.class));
+    }
+
+    // To test the metod update when we use an inexisting id
+    @Test
+    void updateInexistingIdTest() {
+
+        String idToUpdate = "0000005";
+        Activity activityToUpdate = new Activity(null, "ejercicio", "activity update", 400);
+        when(repository.findById(anyString())).thenReturn(Optional.empty());
+
+        // When
+        Optional<Activity> result2 = service.update(idToUpdate, activityToUpdate);
+
+        // Then
+        assertFalse(result2.isPresent());
+        assertThrows(NoSuchElementException.class, () -> {
+            result2.orElseThrow();
+        });
+
+        verify(repository).findById(argThat(new CustomCondition(Data.idsValid, false)));
+        verify(repository, never()).save(any(Activity.class));
+    }
+
+    // To test the metod delete when we use an existing id
+    @Test
+    void deleteExistingIdTest() {
+
+        // Given
+        String idToDelete = "0000001";
+        when(repository.findById(anyString())).thenReturn(Optional.of(Data.createActivity001()));
+
+        // When
+        Optional<Activity> result = service.deleteById(idToDelete);
+
+        // Then
+        assertTrue(result.isPresent());
+        assertEquals("curl martillo", result.get().getName());
+        assertEquals(500, result.get().getCalories());
+        assertEquals("ejercicio", result.get().getCategory());
+
+        verify(repository).findById(argThat(new CustomCondition(Data.idsValid, true)));
+        verify(repository).deleteById(argThat(new CustomCondition(Data.idsValid, true)));
+    }
+
+    // To test the metod delete when we use an inexisting id
+    @Test
+    void deleteInexistingIdTest() {
+
+        // Given
+        String idToDelete = "0000009";
+        when(repository.findById(anyString())).thenReturn(Optional.empty());
+
+        // When
+        Optional<Activity> result = service.deleteById(idToDelete);
+
+        // Then
+        assertFalse(result.isPresent());
+        assertThrows(NoSuchElementException.class, () -> {
+            result.orElseThrow();
+        });
+
+        verify(repository).findById(argThat(new CustomCondition(Data.idsValid, false)));
+        verify(repository, never()).deleteById(argThat(new CustomCondition(Data.idsValid, false)));
+    }
 
 }

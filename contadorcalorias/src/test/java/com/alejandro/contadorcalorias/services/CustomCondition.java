@@ -1,16 +1,16 @@
 package com.alejandro.contadorcalorias.services;
 
-import java.util.Set;
+import java.util.List;
 
 import org.mockito.ArgumentMatcher;
 
 class CustomCondition implements ArgumentMatcher<String> {
 
     private String argument;
-    private final Set<String> idsValid;
+    private final List<String> idsValid;
     private final boolean matchIfInSet;
 
-    public CustomCondition(Set<String> idsValid, boolean matchIfInSet) {
+    public CustomCondition(List<String> idsValid, boolean matchIfInSet) {
         this.idsValid = idsValid;
         this.matchIfInSet = matchIfInSet;
     }

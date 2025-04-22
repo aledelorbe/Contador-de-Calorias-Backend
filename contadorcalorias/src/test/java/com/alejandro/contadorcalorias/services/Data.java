@@ -8,20 +8,22 @@ import com.alejandro.contadorcalorias.entities.Activity;
 // The class that contains the data to be mocked
 class Data {
 
+    static final List<String> idsValid = Arrays.asList("0000001", "0000002", "0000003", "0000004");
+
     static Activity createActivity001() {
-        return new Activity("0000001", "ejercicio", "curl martillo", 500);
+        return new Activity(idsValid.get(0), "ejercicio", "curl martillo", 500);
     }
 
     static Activity createActivity002() {
-        return new Activity("0000002", "ejercicio", "saltar cuerda", 340);
+        return new Activity(idsValid.get(1), "ejercicio", "saltar cuerda", 340);
     }
 
     static Activity createActivity003() {
-        return new Activity("0000003", "comida", "Manzana", 230);
+        return new Activity(idsValid.get(2), "comida", "Manzana", 230);
     }
 
     static Activity createActivity004() {
-        return new Activity("0000004", "comida", "Pambazos", 800);
+        return new Activity(idsValid.get(3), "comida", "Pambazos", 800);
     }
 
     static List<Activity> createActivities001() {
