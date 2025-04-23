@@ -16,6 +16,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import com.alejandro.contadorcalorias.Data;
 import com.alejandro.contadorcalorias.entities.Activity;
 import com.alejandro.contadorcalorias.repositories.ActivityRepository;
 
@@ -196,6 +197,17 @@ class ActivityServiceImpTest {
 
         verify(repository).findById(argThat(new CustomCondition(Data.idsValid, false)));
         verify(repository, never()).deleteById(argThat(new CustomCondition(Data.idsValid, false)));
+    }
+
+    // To test the metod deleteAll
+    @Test
+    void deleteAllTest() {
+
+        // Step: when
+        service.deleteAll();
+
+        // Step: then
+        verify(repository).deleteAll();
     }
 
 }
