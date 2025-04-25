@@ -16,7 +16,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.alejandro.contadorcalorias.Data;
+import com.alejandro.contadorcalorias.data.CustomCondition;
+import com.alejandro.contadorcalorias.data.Data;
 import com.alejandro.contadorcalorias.entities.Activity;
 import com.alejandro.contadorcalorias.repositories.ActivityRepository;
 
@@ -35,13 +36,13 @@ class ActivityServiceImpTest {
     @Test
     void findAllTest() {
 
-        // Step: Given
+        // Given
         when(repository.findAll()).thenReturn(Data.createActivities001());
 
-        // Step: when
+        // when
         List<Activity> activities = service.findAll();
 
-        // Step: then
+        // then
         assertNotNull(activities);
         assertEquals(4, activities.size());
         assertEquals("0000002", activities.get(1).getId());
@@ -56,15 +57,13 @@ class ActivityServiceImpTest {
     @Test
     void findByIdExistingIdTest() {
 
-        // Set<String> idsValid = Set.of("0000001", "0000002", "0000003", "0000004");
-
-        // Step: Given
+        // Given
         when(repository.findById(anyString())).thenReturn(Optional.of(Data.createActivity004()));
 
-        // Step: when
+        // when
         Optional<Activity> optionalActivity = service.findById("0000004");
 
-        // Step: then
+        // then
         assertNotNull(optionalActivity.get());
         assertEquals("0000004", optionalActivity.get().getId());
         assertEquals("comida", optionalActivity.get().getCategory());
@@ -78,13 +77,13 @@ class ActivityServiceImpTest {
     @Test
     void findByIdInexistingIdTest() {
 
-        // Step: Given
+        // Given
         when(repository.findById(anyString())).thenReturn(Optional.empty());
 
-        // Step: when
+        // when
         Optional<Activity> optionalActivity2 = service.findById("0000006");
 
-        // Step: then
+        // then
         assertFalse(optionalActivity2.isPresent());
         assertThrows(NoSuchElementException.class, () -> {
             optionalActivity2.orElseThrow();
@@ -97,18 +96,17 @@ class ActivityServiceImpTest {
     @Test
     void saveTest() {
 
-        // Step: Given
+        // Given
         Activity activityInsert = new Activity(null, "comida", "tacos", 620);
-        when(repository.save(any(Activity.class))).thenReturn(Data.createActivity001());
+        when(repository.save(any(Activity.class))).thenAnswer(invocation -> invocation.getArgument(0));
         
-        // Step: when
+        // when
         Activity newActivity = service.save(activityInsert);
         
-        // Step: then
-        assertEquals("0000001", newActivity.getId());
-        assertEquals("ejercicio", newActivity.getCategory());
-        assertEquals("curl martillo", newActivity.getName());
-        assertEquals(500, newActivity.getCalories());
+        // then
+        assertEquals("comida", newActivity.getCategory());
+        assertEquals("tacos", newActivity.getName());
+        assertEquals(620, newActivity.getCalories());
 
         verify(repository).save(any(Activity.class));
     }
@@ -203,10 +201,10 @@ class ActivityServiceImpTest {
     @Test
     void deleteAllTest() {
 
-        // Step: when
+        // when
         service.deleteAll();
 
-        // Step: then
+        // then
         verify(repository).deleteAll();
     }
 
