@@ -10,8 +10,10 @@ El proyecto **Contador de Calorías** es una aplicación backend desarrollada co
 - **Maven**: Para la gestión de dependencias y construcción del proyecto.
 - **MongoDB**: Base de datos NoSQL para almacenar las actividades.
 - **Postman**: Para simular ser un cliente que hace peticiones al servidor y probar los endpoints.
+- **JUnit**: Framework de pruebas unitarias utilizado para verificar el correcto funcionamiento de los métodos.
+- **Mockito**: Framework de mocking usado para simular dependencias y facilitar las pruebas unitarias en aislamiento.
 
-## Características 
+## Características
 
 - API REST con rutas organizadas para interactuar con actividades. Operaciones soportadas:
   - Listar todas las actividades.
@@ -29,10 +31,18 @@ El proyecto **Contador de Calorías** es una aplicación backend desarrollada co
 
 ## Estructura del Proyecto
 
+### Código fuente de la aplicación
+
 - `controllers/`: Carpeta donde se almacenan las clases que manejan las solicitudes HTTP y definen los endpoints de la API.
 - `services/`: Carpeta donde se almacenan las clases que contienen el código relacionado con la lógica de negocio.
 - `repositories/`: Carpeta donde se almacenan las interfaces que extienden de una interfaz que permite el manejo de datos.
 - `entities/`: Carpeta donde se almacenan las clases que se mapean con sus respectivas colecciones en la base de datos.
+
+### Código de pruebas
+
+- `controllers/`: Contiene las clases de prueba que validan el comportamiento de los métodos en los controladores del código fuente.
+- `services/`: Incluye las clases de prueba dedicadas a verificar el correcto funcionamiento de los métodos dentro de los servicios de la aplicación.
+- `data/`: Almacena clases con datos simulados (mock data) utilizados durante la ejecución de las pruebas.
 
 ## Demo
 
@@ -41,44 +51,54 @@ Puedes ver una demo del proyecto en el siguiente enlace: [Contador de Calorías]
 **Nota:** La demo del proyecto es únicamente demostrativa. Esta no está enlazada con el backend.
 
 ----
-
 # Calorie Counter (Backend)
 
-The **Calorie Counter** project is a backend application developed with **Spring Boot** and **MongoDB**. Its goal is to manage activities containing information such as name, calories, and category, providing a REST API to perform CRUD operations (Create, Read, Update, Delete) on these activities stored in a MongoDB database.
+The **Calorie Counter** project is a backend application developed with **Spring Boot** and **MongoDB**. Its purpose is to manage activities with information such as name, calories, and category, providing a REST API to perform CRUD operations (Create, Read, Update, and Delete) on these activities stored in a MongoDB database.
 
 ## Technologies Used
 
 - **Spring Boot**: Framework for building Java applications. This project uses version `3.4.0`.
-  - **Jakarta Validation**: For input data validation.
+  - **Jakarta Validation**: Used for input data validation.
 - **Java**: Main programming language. This project specifically uses `JDK 17`.
-- **Maven**: For dependency management and project building.
-- **MongoDB**: NoSQL database used to store the activities.
-- **Postman**: Used to simulate a client making requests to the server and to test the endpoints.
+- **Maven**: Used for dependency management and project build.
+- **MongoDB**: NoSQL database used to store activity data.
+- **Postman**: Used to simulate a client making requests to the server and test the API endpoints.
+- **JUnit**: Unit testing framework used to verify the correct behavior of methods.
+- **Mockito**: Mocking framework used to simulate dependencies and facilitate isolated unit testing.
 
-## Features 
+## Features
 
-- REST API with organized routes to interact with activities. Supported operations include:
+- REST API with organized routes to interact with activities. Supported operations:
   - List all activities.
-  - Retrieve a specific activity by its ID.
-  - Create new activities. To do this, you must provide the activity's name, category, and calorie count.
+  - Get a specific activity by its ID.
+  - Create new activities. Requires entering the name, category, and calorie count.
   - Update existing activities.
   - Delete individual activities.
-  - Reset the server: This operation deletes all activities from the database.
-- Integration with MongoDB for data management.
+  - Server reset: Deletes all activities from the database.
+- Integration with MongoDB for data handling.
+- The NoSQL database contains a single collection that manages the activity data.
 - Input data validation. The following validations are applied:
-  - The **name** and **category** attributes of the activity cannot be empty or consist only of whitespace.
+  - The **name** and **category** attributes must not be empty or contain only blank spaces.
   - The **calories** attribute must be greater than zero.
-- Uses the **MVC** architectural design pattern to separate the project code into different layers.
+- The project follows the **MVC architectural pattern**, separating the code into different layers.
 
 ## Project Structure
 
-- `controllers/`: Folder containing classes that handle HTTP requests and define the API endpoints.
-- `services/`: Folder containing classes with business logic.
-- `repositories/`: Folder containing interfaces extending a base interface for data handling.
-- `entities/`: Folder containing classes mapped to their respective collections in the database.
+### Application source code
+
+- `controllers/`: Contains classes that handle HTTP requests and define the API endpoints.
+- `services/`: Contains classes responsible for the business logic.
+- `repositories/`: Contains interfaces that extend from a data handling interface.
+- `entities/`: Contains classes that map to their respective collections in the database.
+
+### Test code
+
+- `controllers/`: Contains test classes that validate the behavior of methods in the controllers.
+- `services/`: Includes test classes focused on verifying the correct behavior of service methods.
+- `data/`: Stores classes with mock data used during test execution.
 
 ## Demo
 
 You can view a demo of the project at the following link: [Calorie Counter](https://deft-kataifi-58f6e5.netlify.app/).
 
-**Note:** The project demo is for demonstration purposes only. It is not connected to the backend.
+**Note:** The project demo is for presentation purposes only. It is not connected to the backend.

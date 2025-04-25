@@ -285,4 +285,27 @@ class ActivityControllerTest {
 
         verify(service).deleteAll();
     }
+
+    // To test the method validation
+    @Test
+    void testValidation() throws Exception {
+
+        // Given
+        Activity activityInsert = new Activity(null, "", "", -10);
+        
+        // when
+        mockMvc.perform(post("/api/activity")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(objectMapper.writeValueAsString(activityInsert)))
+
+        
+        // then
+            .andExpect(status().isBadRequest())
+            .andExpect(jsonPath("$.category").value("El campo category must not be blank"))
+            .andExpect(jsonPath("$.name").value("El campo name must not be blank"))
+            .andExpect(jsonPath("$.calories").value("El campo calories must be greater than or equal to 1"))
+            ;
+
+        verify(service, never()).save(any(Activity.class));
+    }
 }
