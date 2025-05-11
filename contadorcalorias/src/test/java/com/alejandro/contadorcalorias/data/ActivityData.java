@@ -6,7 +6,7 @@ import java.util.List;
 import com.alejandro.contadorcalorias.entities.Activity;
 
 // The class that contains the data to be mocked in the service methods
-public class Data {
+public class ActivityData {
 
     public static final List<String> idsValid = Arrays.asList("0000001", "0000002", "0000003", "0000004");
 
@@ -29,4 +29,5 @@ public class Data {
     public static List<Activity> createActivities001() {
         return Arrays.asList(createActivity001(), createActivity002(), createActivity003(), createActivity004());
     }
+    
 }

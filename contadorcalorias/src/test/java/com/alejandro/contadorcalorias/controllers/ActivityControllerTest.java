@@ -7,13 +7,11 @@ import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.hamcrest.Matchers.*;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-
-import static org.hamcrest.Matchers.*;
-
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,12 +23,12 @@ import org.springframework.test.web.servlet.MvcResult;
 
 import com.alejandro.contadorcalorias.TestConfig;
 import com.alejandro.contadorcalorias.data.CustomCondition;
-import com.alejandro.contadorcalorias.data.Data;
+import com.alejandro.contadorcalorias.data.ActivityData;
 import com.alejandro.contadorcalorias.entities.Activity;
 import com.alejandro.contadorcalorias.services.ActivityService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-// creo queda en duda si los datos simulados se traen de la clase data o de un archivo insert.sql
+
 @WebMvcTest(ActivityController.class)
 @Import(TestConfig.class)
 class ActivityControllerTest {
@@ -46,25 +44,25 @@ class ActivityControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
-    // To test the enpoint getActivities
+    // To test the endpoint getActivities
     @Test
-    void testGetActivities () throws Exception {
+    void getActivitiesTest () throws Exception {
 
         // Given
-        when(service.findAll()).thenReturn(Data.createActivities001());
+        when(service.findAll()).thenReturn(ActivityData.createActivities001());
 
         // When
         MvcResult result = mockMvc.perform(get("/api/activities"))
 
         // Then
-        .andExpect(status().isOk())
-        .andExpect(jsonPath("$").isArray())
-        .andExpect(jsonPath("$", hasSize(4)))
-        .andExpect(jsonPath("$[0].id").value("0000001"))
-        .andExpect(jsonPath("$[0].category").value("ejercicio"))
-        .andExpect(jsonPath("$[0].name").value("curl martillo"))
-        .andExpect(jsonPath("$[0].calories").value(500))
-        .andReturn()
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$").isArray())
+            .andExpect(jsonPath("$", hasSize(4)))
+            .andExpect(jsonPath("$[0].id").value("0000001"))
+            .andExpect(jsonPath("$[0].category").value("ejercicio"))
+            .andExpect(jsonPath("$[0].name").value("curl martillo"))
+            .andExpect(jsonPath("$[0].calories").value(500))
+            .andReturn()
         ;
 
         // Convert the response to a list of objects
@@ -81,24 +79,24 @@ class ActivityControllerTest {
         verify(service).findAll();
     } 
 
-    // To test the enpoint GetfindById with an existing id
+    // To test the endpoint GetfindById with an existing id
     @Test
-    void testGetfindByIdExistingId() throws Exception {
+    void getfindByIdExistingIdTest() throws Exception {
 
         // Given
-        when(service.findById(anyString())).thenReturn(Optional.of(Data.createActivity004()));
+        when(service.findById(anyString())).thenReturn(Optional.of(ActivityData.createActivity004()));
 
         // When
         MvcResult result = mockMvc.perform(get("/api/activity/0000001"))
 
         // Then
-        .andExpect(status().isOk())
-        .andExpect(jsonPath("$").isNotEmpty())
-        .andExpect(jsonPath("$.id").value("0000004"))
-        .andExpect(jsonPath("$.category").value("comida"))
-        .andExpect(jsonPath("$.name").value("Pambazos"))
-        .andExpect(jsonPath("$.calories").value(800))
-        .andReturn()
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$").isNotEmpty())
+            .andExpect(jsonPath("$.id").value("0000004"))
+            .andExpect(jsonPath("$.category").value("comida"))
+            .andExpect(jsonPath("$.name").value("Pambazos"))
+            .andExpect(jsonPath("$.calories").value(800))
+            .andReturn()
         ;
 
         // Convert the response to an object
@@ -111,12 +109,12 @@ class ActivityControllerTest {
         assertEquals("Pambazos", activity.getName());
         assertEquals(800, activity.getCalories());
 
-        verify(service).findById(argThat(new CustomCondition(Data.idsValid, true)));
+        verify(service).findById(argThat(new CustomCondition(ActivityData.idsValid, true)));
     }
     
-    // To test the enpoint GetfindById with an inexisting id
+    // To test the endpoint GetfindById with an inexisting id
     @Test
-    void testGetfindByIdInexistingId() throws Exception {
+    void getfindByIdInexistingIdTest() throws Exception {
         
         // Given
         when(service.findById(anyString())).thenReturn(Optional.empty());
@@ -125,16 +123,16 @@ class ActivityControllerTest {
         mockMvc.perform(get("/api/activity/0000008"))
         
         // Then
-        .andExpect(status().isNotFound())
-        .andExpect(content().string(""))
+            .andExpect(status().isNotFound())
+            .andExpect(content().string(""))
         ;
 
-        verify(service).findById(argThat(new CustomCondition(Data.idsValid, false)));
+        verify(service).findById(argThat(new CustomCondition(ActivityData.idsValid, false)));
     }
 
-    // To test the enpoint post
+    // To test the endpoint save
     @Test
-    void testPostSave() throws Exception {
+    void postSaveTest() throws Exception {
 
         // Given
         Activity activityInsert = new Activity(null, "comida", "tacos", 620);
@@ -144,7 +142,6 @@ class ActivityControllerTest {
         MvcResult result = mockMvc.perform(post("/api/activity")
             .contentType(MediaType.APPLICATION_JSON)
             .content(objectMapper.writeValueAsString(activityInsert)))
-
         
         // then
             .andExpect(status().isCreated())
@@ -152,7 +149,7 @@ class ActivityControllerTest {
             .andExpect(jsonPath("$.name").value("tacos"))
             .andExpect(jsonPath("$.calories").value(620))
             .andReturn()
-            ;
+        ;
 
         // Convert the response to an object
         String jsonString = result.getResponse().getContentAsString();
@@ -165,9 +162,9 @@ class ActivityControllerTest {
         verify(service).save(any(Activity.class));
     }
 
-    // To test the enpoint update when we use an existing id 
+    // To test the endpoint update when we use an existing id 
     @Test
-    void testPutUpdateExistingId() throws Exception {
+    void putUpdateExistingIdTest() throws Exception {
     
         // Given
         String idToUpdate = "0000002";
@@ -185,7 +182,7 @@ class ActivityControllerTest {
             .andExpect(jsonPath("$.name").value("activity update"))
             .andExpect(jsonPath("$.calories").value(400))
             .andReturn()
-            ;
+        ;
 
         // Convert the response to an object
         String jsonString = result.getResponse().getContentAsString();
@@ -195,12 +192,12 @@ class ActivityControllerTest {
         assertEquals("activity update", newActivity.getName());
         assertEquals(400, newActivity.getCalories());
 
-        verify(service).update(argThat(new CustomCondition(Data.idsValid, true)), any(Activity.class));
+        verify(service).update(argThat(new CustomCondition(ActivityData.idsValid, true)), any(Activity.class));
     }
 
-    // To test the enpoint update when we use an inexisting id 
+    // To test the endpoint update when we use an inexisting id 
     @Test
-    void testPutUpdateInexistingId() throws Exception {
+    void putUpdateInexistingIdTest() throws Exception {
     
         // Given
         String idToUpdate = "0000008";
@@ -215,18 +212,18 @@ class ActivityControllerTest {
         // then
             .andExpect(status().isNotFound())
             .andExpect(content().string(""))
-            ;
+        ;
 
-        verify(service).update(argThat(new CustomCondition(Data.idsValid, false)), any(Activity.class));
+        verify(service).update(argThat(new CustomCondition(ActivityData.idsValid, false)), any(Activity.class));
     }
 
-    // To test the enpoint delete when we use an existing id 
+    // To test the endpoint delete when we use an existing id 
     @Test
-    void testDeleteExistingId() throws Exception {
+    void deleteExistingIdTest() throws Exception {
     
         // Given
         String idToDelete = "0000001";
-        when(service.deleteById(anyString())).thenReturn(Optional.of(Data.createActivity001()));
+        when(service.deleteById(anyString())).thenReturn(Optional.of(ActivityData.createActivity001()));
 
         // When
         MvcResult result = mockMvc.perform(delete("/api/activity/" + idToDelete))
@@ -238,7 +235,7 @@ class ActivityControllerTest {
             .andExpect(jsonPath("$.name").value("curl martillo"))
             .andExpect(jsonPath("$.calories").value(500))
             .andReturn()
-            ;
+        ;
 
         // Convert the response to an object
         String jsonString = result.getResponse().getContentAsString();
@@ -249,12 +246,12 @@ class ActivityControllerTest {
         assertEquals("curl martillo", newActivity.getName());
         assertEquals(500, newActivity.getCalories());
 
-        verify(service).deleteById(argThat(new CustomCondition(Data.idsValid, true)));
+        verify(service).deleteById(argThat(new CustomCondition(ActivityData.idsValid, true)));
     }
 
-    // To test the enpoint delete when we use an inexisting id 
+    // To test the endpoint delete when we use an inexisting id 
     @Test
-    void testDeleteInexistingId() throws Exception {
+    void deleteInexistingIdTest() throws Exception {
     
         // Given
         String idToDelete = "0000009";
@@ -266,14 +263,14 @@ class ActivityControllerTest {
         // then
             .andExpect(status().isNotFound())
             .andExpect(content().string(""))
-            ;
+        ;
 
-        verify(service).deleteById(argThat(new CustomCondition(Data.idsValid, false)));
+        verify(service).deleteById(argThat(new CustomCondition(ActivityData.idsValid, false)));
     }
 
-    // To test the enpoint deleteAll
+    // To test the endpoint deleteAll
     @Test
-    void testDeleteAll() throws Exception {
+    void deleteAllTest() throws Exception {
     
         // When
         mockMvc.perform(delete("/api/activities"))
@@ -281,14 +278,14 @@ class ActivityControllerTest {
         // then
             .andExpect(status().isOk())
             .andExpect(content().string(""))
-            ;
+        ;
 
         verify(service).deleteAll();
     }
 
     // To test the method validation
     @Test
-    void testValidation() throws Exception {
+    void validationTest() throws Exception {
 
         // Given
         Activity activityInsert = new Activity(null, "", "", -10);
@@ -297,15 +294,15 @@ class ActivityControllerTest {
         mockMvc.perform(post("/api/activity")
             .contentType(MediaType.APPLICATION_JSON)
             .content(objectMapper.writeValueAsString(activityInsert)))
-
         
         // then
             .andExpect(status().isBadRequest())
             .andExpect(jsonPath("$.category").value("El campo category must not be blank"))
             .andExpect(jsonPath("$.name").value("El campo name must not be blank"))
             .andExpect(jsonPath("$.calories").value("El campo calories must be greater than or equal to 1"))
-            ;
+        ;
 
         verify(service, never()).save(any(Activity.class));
     }
+    
 }
