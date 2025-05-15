@@ -15,18 +15,29 @@ El proyecto **Contador de Calorías** es una aplicación backend desarrollada co
 
 ## Características
 
-- API REST con rutas organizadas para interactuar con actividades. Operaciones soportadas:
+### EndPoint's
+
+Rutas organizadas para interactuar con las actividades. Operaciones soportadas:
   - Listar todas las actividades.
   - Obtener una actividad específica por su ID.
   - Crear nuevas actividades. Para ello se debe ingresar el nombre, categoría y cantidad de calorías de una actividad.
   - Actualizar actividades existentes.
   - Eliminar actividades individuales.
   - Reinicio del servidor: Consiste en eliminar todas las actividades de la base de datos.
+
+### Gestor de base de datos
+
 - Integración con MongoDB para la manipulación de datos.
 - La base de datos NoSQL cuenta con una unica coleccion, la cual gestiona la información de las actividades.
-- Validación de datos de entrada. Se emplean las siguientes validaciones:
+
+### Validaciones
+
+Se emplean las siguientes validaciones:
   - No se permite que los atributos **nombre** y **categoría** de la actividad se reciban vacíos o con puros espacios en blanco.
   - No se permite que el atributo **calorías** se reciba con un valor menor o igual a cero.
+
+### Patrones de diseño
+
 - Se emplea el patrón de diseño arquitectónico conocido como **MVC**, para separar en diferentes capas el código del proyecto.
 
 ## Estructura del Proyecto
@@ -58,47 +69,58 @@ The **Calorie Counter** project is a backend application developed with **Spring
 ## Technologies Used
 
 - **Spring Boot**: Framework for building Java applications. This project uses version `3.4.0`.
-  - **Jakarta Validation**: Used for input data validation.
+  - **Jakarta Validation**: For input data validation.
 - **Java**: Main programming language. This project specifically uses `JDK 17`.
-- **Maven**: Used for dependency management and project build.
-- **MongoDB**: NoSQL database used to store activity data.
-- **Postman**: Used to simulate a client making requests to the server and test the API endpoints.
+- **Maven**: For dependency management and project build.
+- **MongoDB**: NoSQL database used to store the activities.
+- **Postman**: To simulate a client making requests to the server and test the endpoints.
 - **JUnit**: Unit testing framework used to verify the correct behavior of methods.
 - **Mockito**: Mocking framework used to simulate dependencies and facilitate isolated unit testing.
 
 ## Features
 
-- REST API with organized routes to interact with activities. Supported operations:
+### Endpoints
+
+Organized routes to interact with activities. Supported operations:
   - List all activities.
-  - Get a specific activity by its ID.
-  - Create new activities. Requires entering the name, category, and calorie count.
+  - Retrieve a specific activity by its ID.
+  - Create new activities. This requires entering the name, category, and calorie count of an activity.
   - Update existing activities.
   - Delete individual activities.
   - Server reset: Deletes all activities from the database.
-- Integration with MongoDB for data handling.
-- The NoSQL database contains a single collection that manages the activity data.
-- Input data validation. The following validations are applied:
-  - The **name** and **category** attributes must not be empty or contain only blank spaces.
+
+### Database Management
+
+- Integration with MongoDB for data manipulation.
+- The NoSQL database contains a single collection that manages the activity information.
+
+### Validations
+
+The following validations are applied:
+  - The **name** and **category** attributes of the activity cannot be empty or consist only of whitespace.
   - The **calories** attribute must be greater than zero.
-- The project follows the **MVC architectural pattern**, separating the code into different layers.
+
+### Design Patterns
+
+- The architectural design pattern **MVC** (Model-View-Controller) is used to separate the project code into different layers.
 
 ## Project Structure
 
-### Application source code
+### Application Source Code
 
-- `controllers/`: Contains classes that handle HTTP requests and define the API endpoints.
-- `services/`: Contains classes responsible for the business logic.
-- `repositories/`: Contains interfaces that extend from a data handling interface.
-- `entities/`: Contains classes that map to their respective collections in the database.
+- `controllers/`: Folder containing the classes that handle HTTP requests and define the API endpoints.
+- `services/`: Folder containing the classes related to business logic.
+- `repositories/`: Folder with interfaces that extend from a base interface to handle data operations.
+- `entities/`: Folder with classes that map to their respective collections in the database.
 
-### Test code
+### Test Code
 
-- `controllers/`: Contains test classes that validate the behavior of methods in the controllers.
-- `services/`: Includes test classes focused on verifying the correct behavior of service methods.
+- `controllers/`: Contains test classes that validate the behavior of controller methods from the source code.
+- `services/`: Includes test classes dedicated to verifying the correct behavior of service methods.
 - `data/`: Stores classes with mock data used during test execution.
 
 ## Demo
 
 You can view a demo of the project at the following link: [Calorie Counter](https://deft-kataifi-58f6e5.netlify.app/).
 
-**Note:** The project demo is for presentation purposes only. It is not connected to the backend.
+**Note:** The project demo is for demonstration purposes only. It is not connected to the backend.
