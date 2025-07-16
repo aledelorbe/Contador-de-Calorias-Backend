@@ -1,0 +1,145 @@
+openapi: 3.1.1
+info:
+  title: Calorie Counter API
+  description: REST API used to manage activities with information such as name, calories, and category. It supports Create, Read, Update, and Delete operations for these activities. Additionally, it allows resetting the API, meaning all activities can be deleted.
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8080/api
+    description: Local server to develop
+
+paths:
+  /activities:
+    get:
+      summary: Get all activities
+      responses:
+        '200':
+          description: List of all activities
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Activity'
+
+    post:
+      summary: Create a new activity
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActivityInput'
+      responses:
+        '201':
+          description: Activity created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Activity'
+        '400':
+          description: Validation error
+
+    delete:
+      summary: Delete all activities
+      responses:
+        '200':
+          description: All activities deleted
+
+  /activities/{id}:
+    get:
+      summary: Get an activity by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Activity found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Activity'
+        '404':
+          description: Activity not found
+
+    put:
+      summary: Update an activity by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActivityInput'
+      responses:
+        '201':
+          description: Activity updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Activity'
+        '400':
+          description: Validation error
+        '404':
+          description: Activity not found
+
+    delete:
+      summary: Delete an activity by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Activity deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Activity'
+        '404':
+          description: Activity not found
+
+components:
+  schemas:
+    Activity:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        calories:
+          type: number
+          format: float
+        category:
+          type: string
+      required:
+        - id
+        - name
+        - calories
+        - category
+
+    ActivityInput:
+      type: object
+      properties:
+        name:
+          type: string
+        calories:
+          type: number
+          format: float
+        category:
+          type: string
+      required:
+        - name
+        - calories
+        - category
