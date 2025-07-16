@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 
 @RestController // To create a api rest.
-@RequestMapping("/api") // To create a base path.
+@RequestMapping("/api/activities") // To create a base path.
 public class ActivityController {
     
     // To Inject the service dependency
@@ -34,13 +34,13 @@ public class ActivityController {
     private ActivityService service;
 
     // To create an endpoint that allows invocating the method findAll.
-    @GetMapping("/activities")
+    @GetMapping()
     public List<Activity> activities() {
         return service.findAll();
     }
 
     // To create an endpoint that allows invocating the method fingById.
-    @GetMapping("/activity/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<?> activity(@PathVariable String id) {
         // Search a specific activity and if it's present then return it.
         Optional<Activity> optionalActivity = service.findById(id);
@@ -53,7 +53,7 @@ public class ActivityController {
 
     // To create an endpoint that allows invocating the method save.
     // The annotation called 'RequestBody' allows receiving data of a client
-    @PostMapping("/activity")
+    @PostMapping()
     public ResponseEntity<?> saveActivity(@Valid @RequestBody Activity activity, BindingResult result) {
         // To handle the obligations of object attributes
         if( result.hasFieldErrors() ){
@@ -66,7 +66,7 @@ public class ActivityController {
     }
 
     // To create an endpoint that allows update all of atributte values a specific activity based its id.
-    @PutMapping("/activity/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<?> updateActivity(@Valid @RequestBody Activity activity, BindingResult result, @PathVariable String id) {
         // To handle of obligations of object attributes
         if( result.hasFieldErrors() ){
@@ -84,7 +84,7 @@ public class ActivityController {
     }
 
     // To create an endpoint that allows deleting a specific activity based its id.
-    @DeleteMapping("/activity/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteActivity(@PathVariable String id) {
         // Find specific activity and if it's present then return specific activity
         Optional<Activity> optionalActivity = service.deleteById(id);
@@ -97,7 +97,7 @@ public class ActivityController {
 
     // To create a endpoint that allows deleting all of activities
     // and return response ok
-    @DeleteMapping("/activities")
+    @DeleteMapping()
     public ResponseEntity<?> deleteAllOfActivity() {
         service.deleteAll();
         return ResponseEntity.ok().build();

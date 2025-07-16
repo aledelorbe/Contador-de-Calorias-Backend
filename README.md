@@ -18,12 +18,12 @@ El proyecto **Contador de Calorías** es una aplicación backend desarrollada co
 ### EndPoint's
 
 Rutas organizadas para interactuar con las actividades. Operaciones soportadas:
-  - Listar todas las actividades.
-  - Obtener una actividad específica por su ID.
-  - Crear nuevas actividades. Para ello se debe ingresar el nombre, categoría y cantidad de calorías de una actividad.
-  - Actualizar actividades existentes.
-  - Eliminar actividades individuales.
-  - Reinicio del servidor: Consiste en eliminar todas las actividades de la base de datos.
+    - Listar todas las actividades.
+    - Obtener una actividad específica por su ID.
+    - Crear nuevas actividades. Para ello se debe ingresar el nombre, categoría y cantidad de calorías de una actividad.
+    - Actualizar actividades existentes.
+    - Eliminar actividades individuales.
+    - Reinicio del servidor: Consiste en eliminar todas las actividades de la base de datos.
 
 ### Gestor de base de datos
 
@@ -33,8 +33,8 @@ Rutas organizadas para interactuar con las actividades. Operaciones soportadas:
 ### Validaciones
 
 Se emplean las siguientes validaciones:
-  - No se permite que los atributos **nombre** y **categoría** de la actividad se reciban vacíos o con puros espacios en blanco.
-  - No se permite que el atributo **calorías** se reciba con un valor menor o igual a cero.
+    - No se permite que los atributos **nombre** y **categoría** de la actividad se reciban vacíos o con puros espacios en blanco.
+    - No se permite que el atributo **calorías** se reciba con un valor menor o igual a cero.
 
 ### Patrones de diseño
 
@@ -82,12 +82,12 @@ The **Calorie Counter** project is a backend application developed with **Spring
 ### Endpoints
 
 Organized routes to interact with activities. Supported operations:
-  - List all activities.
-  - Retrieve a specific activity by its ID.
-  - Create new activities. This requires entering the name, category, and calorie count of an activity.
-  - Update existing activities.
-  - Delete individual activities.
-  - Server reset: Deletes all activities from the database.
+    - List all activities.
+    - Retrieve a specific activity by its ID.
+    - Create new activities. This requires entering the name, category, and calorie count of an activity.
+    - Update existing activities.
+    - Delete individual activities.
+    - Server reset: Deletes all activities from the database.
 
 ### Database Management
 
@@ -97,8 +97,8 @@ Organized routes to interact with activities. Supported operations:
 ### Validations
 
 The following validations are applied:
-  - The **name** and **category** attributes of the activity cannot be empty or consist only of whitespace.
-  - The **calories** attribute must be greater than zero.
+    - The **name** and **category** attributes of the activity cannot be empty or consist only of whitespace.
+    - The **calories** attribute must be greater than zero.
 
 ### Design Patterns
 
