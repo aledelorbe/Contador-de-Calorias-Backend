@@ -61,19 +61,24 @@ Puedes ver una demo del proyecto en el siguiente enlace: [Contador de Calorías]
 
 **Nota:** La demo del proyecto es únicamente demostrativa. Esta no está enlazada con el backend.
 
+## Futuras mejoras
+
+Actualizar comentarios
+
 ----
+
 # Calorie Counter (Backend)
 
-The **Calorie Counter** project is a backend application developed with **Spring Boot** and **MongoDB**. Its purpose is to manage activities with information such as name, calories, and category, providing a REST API to perform CRUD operations (Create, Read, Update, and Delete) on these activities stored in a MongoDB database.
+The **Calorie Counter** project is a backend application developed using **Spring Boot** and **MongoDB**. Its purpose is to manage activities with information such as name, calories, and category, providing a REST API to perform CRUD operations (Create, Read, Update, and Delete) on these activities stored in a MongoDB database.
 
 ## Technologies Used
 
 - **Spring Boot**: Framework for building Java applications. This project uses version `3.4.0`.
-  - **Jakarta Validation**: For input data validation.
-- **Java**: Main programming language. This project specifically uses `JDK 17`.
+  - **Jakarta Validation**: For validating input data.
+- **Java**: Main programming language. This project uses `JDK 17`.
 - **Maven**: For dependency management and project build.
-- **MongoDB**: NoSQL database used to store the activities.
-- **Postman**: To simulate a client making requests to the server and test the endpoints.
+- **MongoDB**: NoSQL database used to store activities.
+- **Postman**: Used to simulate a client sending requests to the server and test the endpoints.
 - **JUnit**: Unit testing framework used to verify the correct behavior of methods.
 - **Mockito**: Mocking framework used to simulate dependencies and facilitate isolated unit testing.
 
@@ -81,46 +86,50 @@ The **Calorie Counter** project is a backend application developed with **Spring
 
 ### Endpoints
 
-Organized routes to interact with activities. Supported operations:
+Organized routes to interact with the activities. Supported operations:
     - List all activities.
-    - Retrieve a specific activity by its ID.
-    - Create new activities. This requires entering the name, category, and calorie count of an activity.
+    - Get a specific activity by its ID.
+    - Create new activities by providing the name, category, and calorie count.
     - Update existing activities.
     - Delete individual activities.
     - Server reset: Deletes all activities from the database.
 
-### Database Management
+### Database Manager
 
 - Integration with MongoDB for data manipulation.
 - The NoSQL database contains a single collection that manages the activity information.
 
 ### Validations
 
-The following validations are applied:
-    - The **name** and **category** attributes of the activity cannot be empty or consist only of whitespace.
+The following validations are enforced:
+    - The **name** and **category** attributes must not be empty or contain only whitespace.
     - The **calories** attribute must be greater than zero.
 
 ### Design Patterns
 
-- The architectural design pattern **MVC** (Model-View-Controller) is used to separate the project code into different layers.
+- The **MVC** architectural design pattern is used to separate the code into different layers.
 
 ## Project Structure
 
 ### Application Source Code
 
-- `controllers/`: Folder containing the classes that handle HTTP requests and define the API endpoints.
-- `services/`: Folder containing the classes related to business logic.
-- `repositories/`: Folder with interfaces that extend from a base interface to handle data operations.
-- `entities/`: Folder with classes that map to their respective collections in the database.
+- `controllers/`: Contains classes that handle HTTP requests and define the API endpoints.
+- `services/`: Contains classes with business logic.
+- `repositories/`: Contains interfaces that extend from a base interface for data handling.
+- `entities/`: Contains classes mapped to the corresponding collections in the database.
 
 ### Test Code
 
-- `controllers/`: Contains test classes that validate the behavior of controller methods from the source code.
-- `services/`: Includes test classes dedicated to verifying the correct behavior of service methods.
-- `data/`: Stores classes with mock data used during test execution.
+- `controllers/`: Contains test classes that validate the behavior of the controller methods.
+- `services/`: Includes test classes to verify the correct functionality of service methods.
+- `data/`: Stores mock data classes used during test execution.
 
 ## Demo
 
 You can view a demo of the project at the following link: [Calorie Counter](https://deft-kataifi-58f6e5.netlify.app/).
 
-**Note:** The project demo is for demonstration purposes only. It is not connected to the backend.
+**Note:** The demo is for presentation purposes only and is not connected to the backend.
+
+## Future Improvements
+
+Update comments
