@@ -1,0 +1,34 @@
+
+services:
+  calorie-counter:
+    container_name: calorie-counter
+    ports:
+      - "7000:7000"
+    networks:
+      - calorie-network
+    image: calorie-image
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    env_file: .\.env
+    depends_on:
+      - calorie-counter-db
+
+  calorie-counter-db:
+    container_name: calorie-counter-db
+    ports:
+      - "7001:27017"
+    networks:
+      - calorie-network
+    image:  mongodb/mongodb-community-server:7.0-ubi8
+    volumes:
+      - calorie-volume:/data/db
+
+networks:
+  calorie-network:
+    name: calorie-counter-network
+    driver: bridge
+
+volumes:
+  calorie-volume:
+    name: calorie-counter-volume
