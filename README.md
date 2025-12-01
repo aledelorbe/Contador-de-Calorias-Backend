@@ -12,6 +12,8 @@ El proyecto **Contador de Calorías** es una aplicación backend desarrollada co
 - **Postman**: Para simular ser un cliente que hace peticiones al servidor y probar los endpoints.
 - **JUnit**: Framework de pruebas unitarias utilizado para verificar el correcto funcionamiento de los métodos.
 - **Mockito**: Framework de mocking usado para simular dependencias y facilitar las pruebas unitarias en aislamiento.
+- **Swagger / OpenAPI**: Herramienta para documentar y probar los endpoints de la API de forma interactiva.
+- **Docker**: permite ejecutar esta aplicación en un entorno aislado, sin necesidad de configurar manualmente dependencias o versiones. 
 
 ## Características
 
@@ -40,6 +42,17 @@ Se emplean las siguientes validaciones:
 
 - Se emplea el patrón de diseño arquitectónico conocido como **MVC**, para separar en diferentes capas el código del proyecto.
 
+### Docker
+
+Este proyecto utiliza Docker para crear un entorno de ejecución aislado y reproducible, asegurando que la aplicación funcione igual en cualquier sistema. 
+
+Archivos relevantes:
+
+- `Dockerfile`: define la imagen base y cómo se construye el entorno del proyecto.
+- `docker-compose.yml`: orquesta los servicios (API y base de datos) para facilitar la ejecución local.
+- `.env`: contiene variables de entorno usadas por Docker (no se incluye en el repositorio por seguridad).
+
+
 ## Estructura del Proyecto
 
 ### Código fuente de la aplicación
@@ -63,73 +76,88 @@ Puedes ver una demo del proyecto en el siguiente enlace: [Contador de Calorías]
 
 ## Futuras mejoras
 
-Actualizar comentarios
+Despliegue en aws.
+
+Despliegue automatico usando jenkins.
 
 ----
 
 # Calorie Counter (Backend)
 
-The **Calorie Counter** project is a backend application developed using **Spring Boot** and **MongoDB**. Its purpose is to manage activities with information such as name, calories, and category, providing a REST API to perform CRUD operations (Create, Read, Update, and Delete) on these activities stored in a MongoDB database.
+The **Calorie Counter** project is a backend application built with **Spring Boot** and **MongoDB**. Its main purpose is to manage activities with information such as name, calories, and category, providing a REST API to perform CRUD operations (Create, Read, Update, and Delete) on activities stored in a MongoDB database.
 
 ## Technologies Used
 
 - **Spring Boot**: Framework for building Java applications. This project uses version `3.4.0`.
-  - **Jakarta Validation**: For validating input data.
+  - **Jakarta Validation**: For input data validation.
 - **Java**: Main programming language. This project uses `JDK 17`.
-- **Maven**: For dependency management and project build.
+- **Maven**: For dependency management and project building.
 - **MongoDB**: NoSQL database used to store activities.
-- **Postman**: Used to simulate a client sending requests to the server and test the endpoints.
-- **JUnit**: Unit testing framework used to verify the correct behavior of methods.
+- **Postman**: Used to simulate client requests and test API endpoints.
+- **JUnit**: Unit testing framework used to verify method functionality.
 - **Mockito**: Mocking framework used to simulate dependencies and facilitate isolated unit testing.
+- **Swagger / OpenAPI**: Tool for documenting and interactively testing API endpoints.
+- **Docker**: Allows running the application in an isolated environment without manually configuring dependencies or versions.
 
 ## Features
 
 ### Endpoints
 
 Organized routes to interact with the activities. Supported operations:
-    - List all activities.
-    - Get a specific activity by its ID.
-    - Create new activities by providing the name, category, and calorie count.
-    - Update existing activities.
-    - Delete individual activities.
-    - Server reset: Deletes all activities from the database.
+- List all activities.
+- Retrieve a specific activity by its ID.
+- Create new activities by providing the name, category, and calorie count.
+- Update existing activities.
+- Delete individual activities.
+- Server reset: deletes all activities from the database.
 
 ### Database Manager
 
-- Integration with MongoDB for data manipulation.
-- The NoSQL database contains a single collection that manages the activity information.
+- Integrated with MongoDB for data handling.
+- The NoSQL database has a single collection that manages activity information.
 
 ### Validations
 
-The following validations are enforced:
-    - The **name** and **category** attributes must not be empty or contain only whitespace.
-    - The **calories** attribute must be greater than zero.
+The following validations are applied:
+- The **name** and **category** fields cannot be empty or contain only whitespace.
+- The **calories** attribute must be greater than zero.
 
 ### Design Patterns
 
-- The **MVC** architectural design pattern is used to separate the code into different layers.
+- The project follows the **MVC (Model-View-Controller)** architectural pattern to separate code into distinct layers.
+
+### Docker
+
+This project uses Docker to create an isolated and reproducible runtime environment, ensuring consistent behavior across different systems.
+
+Relevant files:
+
+- `Dockerfile`: Defines the base image and how the project environment is built.
+- `docker-compose.yml`: Orchestrates the services (API and database) to simplify local execution.
+- `.env`: Contains environment variables used by Docker (not included in the repository for security reasons).
 
 ## Project Structure
 
 ### Application Source Code
 
 - `controllers/`: Contains classes that handle HTTP requests and define the API endpoints.
-- `services/`: Contains classes with business logic.
-- `repositories/`: Contains interfaces that extend from a base interface for data handling.
-- `entities/`: Contains classes mapped to the corresponding collections in the database.
+- `services/`: Contains business logic classes.
+- `repositories/`: Contains interfaces that extend data-handling repositories.
+- `entities/`: Contains classes mapped to their corresponding MongoDB collections.
 
 ### Test Code
 
-- `controllers/`: Contains test classes that validate the behavior of the controller methods.
-- `services/`: Includes test classes to verify the correct functionality of service methods.
+- `controllers/`: Contains test classes validating controller method behavior.
+- `services/`: Contains test classes verifying service layer functionality.
 - `data/`: Stores mock data classes used during test execution.
 
 ## Demo
 
-You can view a demo of the project at the following link: [Calorie Counter](https://deft-kataifi-58f6e5.netlify.app/).
+You can view a demo of the project here: [Calorie Counter](https://deft-kataifi-58f6e5.netlify.app/).
 
 **Note:** The demo is for presentation purposes only and is not connected to the backend.
 
 ## Future Improvements
 
-Update comments
+- Deployment on AWS.  
+- Automated deployment using Jenkins.
