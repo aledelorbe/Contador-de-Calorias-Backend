@@ -9,15 +9,15 @@ public interface ActivityService {
     
     // Declaration of methods to use in 'serviceImp' file
     
-    public List<Activity> findAll();
+    List<Activity> findAll();
     
-    public Optional<Activity> findById(String id);
+    Optional<Activity> findById(String id);
     
-    public Activity save(Activity activity);
+    Activity save(Activity activity);
 
-    public Optional<Activity> update(String id, Activity activity);
+    Optional<Activity> update(String id, Activity activity);
 
-    public Optional<Activity> deleteById(String id);
+    Optional<Activity> deleteById(String id);
 
-    public void deleteAll();
+    void deleteAll();
 }

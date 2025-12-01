@@ -16,8 +16,9 @@ public class ActivityServiceImp implements ActivityService{
     // To inject the repository dependency.
     @Autowired
     private ActivityRepository repository;
-    
-    // To list all of activities (records) in the collection 'activities'
+
+
+    // To list all activities (records) in the collection 'activities'
     @Override
     @Transactional(readOnly = true)
     public List<Activity> findAll(){

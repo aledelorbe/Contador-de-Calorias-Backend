@@ -7,8 +7,7 @@ import jakarta.validation.constraints.NotBlank;
 
 import org.springframework.data.annotation.Id;
 
-// To specific the name of collection in mongoDb
-// In mongoDb the name of this collection is 'activities' but in this project 
+// In mongoDb the name of this collection is 'activities' but in this project
 // the name of this class is 'Activity'
 @Document(collection = "activities")
 public class Activity {

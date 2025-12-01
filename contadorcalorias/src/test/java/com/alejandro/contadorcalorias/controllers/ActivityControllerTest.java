@@ -44,6 +44,9 @@ class ActivityControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
+    private static final String BASE_URL = "/api/activities";
+
+
     // To test the endpoint getActivities
     @Test
     void getActivitiesTest () throws Exception {
@@ -52,7 +55,7 @@ class ActivityControllerTest {
         when(service.findAll()).thenReturn(ActivityData.createActivities001());
 
         // When
-        MvcResult result = mockMvc.perform(get("/api/activities"))
+        MvcResult result = mockMvc.perform(get(BASE_URL))
 
         // Then
             .andExpect(status().isOk())
@@ -87,7 +90,7 @@ class ActivityControllerTest {
         when(service.findById(anyString())).thenReturn(Optional.of(ActivityData.createActivity004()));
 
         // When
-        MvcResult result = mockMvc.perform(get("/api/activity/0000001"))
+        MvcResult result = mockMvc.perform(get(BASE_URL + "/0000001"))
 
         // Then
             .andExpect(status().isOk())
@@ -120,7 +123,7 @@ class ActivityControllerTest {
         when(service.findById(anyString())).thenReturn(Optional.empty());
         
         // When
-        mockMvc.perform(get("/api/activity/0000008"))
+        mockMvc.perform(get(BASE_URL + "/0000008"))
         
         // Then
             .andExpect(status().isNotFound())
@@ -139,7 +142,7 @@ class ActivityControllerTest {
         when(service.save(any(Activity.class))).thenAnswer(invocation -> invocation.getArgument(0));
         
         // when
-        MvcResult result = mockMvc.perform(post("/api/activity")
+        MvcResult result = mockMvc.perform(post(BASE_URL)
             .contentType(MediaType.APPLICATION_JSON)
             .content(objectMapper.writeValueAsString(activityInsert)))
         
@@ -172,7 +175,7 @@ class ActivityControllerTest {
         when(service.update(anyString(), any(Activity.class))).thenAnswer(invocation -> Optional.of(invocation.getArgument(1)));
 
         // When
-        MvcResult result = mockMvc.perform(put("/api/activity/" + idToUpdate)
+        MvcResult result = mockMvc.perform(put(BASE_URL + "/" + idToUpdate)
             .contentType(MediaType.APPLICATION_JSON)
             .content(objectMapper.writeValueAsString(activityToUpdate)))
 
@@ -205,7 +208,7 @@ class ActivityControllerTest {
         when(service.update(anyString(), any(Activity.class))).thenReturn(Optional.empty());
 
         // When
-        mockMvc.perform(put("/api/activity/" + idToUpdate)
+        mockMvc.perform(put(BASE_URL + "/" + idToUpdate)
             .contentType(MediaType.APPLICATION_JSON)
             .content(objectMapper.writeValueAsString(activityToUpdate)))
 
@@ -226,7 +229,7 @@ class ActivityControllerTest {
         when(service.deleteById(anyString())).thenReturn(Optional.of(ActivityData.createActivity001()));
 
         // When
-        MvcResult result = mockMvc.perform(delete("/api/activity/" + idToDelete))
+        MvcResult result = mockMvc.perform(delete(BASE_URL + "/" + idToDelete))
 
         // then
             .andExpect(status().isOk())
@@ -258,7 +261,7 @@ class ActivityControllerTest {
         when(service.deleteById(anyString())).thenReturn(Optional.empty());
 
         // When
-        mockMvc.perform(delete("/api/activity/" + idToDelete))
+        mockMvc.perform(delete(BASE_URL + "/" + idToDelete))
 
         // then
             .andExpect(status().isNotFound())
@@ -273,7 +276,7 @@ class ActivityControllerTest {
     void deleteAllTest() throws Exception {
     
         // When
-        mockMvc.perform(delete("/api/activities"))
+        mockMvc.perform(delete(BASE_URL))
 
         // then
             .andExpect(status().isOk())
@@ -291,7 +294,7 @@ class ActivityControllerTest {
         Activity activityInsert = new Activity(null, "", "", -10);
         
         // when
-        mockMvc.perform(post("/api/activity")
+        mockMvc.perform(post(BASE_URL)
             .contentType(MediaType.APPLICATION_JSON)
             .content(objectMapper.writeValueAsString(activityInsert)))
         

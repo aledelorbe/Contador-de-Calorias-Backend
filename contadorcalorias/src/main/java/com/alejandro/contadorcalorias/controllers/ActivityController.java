@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 
-@RestController // To create a api rest.
+@RestController // To create an api rest.
 @RequestMapping("/api/activities") // To create a base path.
 public class ActivityController {
     
@@ -33,13 +33,14 @@ public class ActivityController {
     @Autowired
     private ActivityService service;
 
+
     // To create an endpoint that allows invocating the method findAll.
     @GetMapping()
     public List<Activity> activities() {
         return service.findAll();
     }
 
-    // To create an endpoint that allows invocating the method fingById.
+    // To create an endpoint that allows invocating the method findById.
     @GetMapping("/{id}")
     public ResponseEntity<?> activity(@PathVariable String id) {
         // Search a specific activity and if it's present then return it.
@@ -65,7 +66,7 @@ public class ActivityController {
         return ResponseEntity.status(HttpStatus.CREATED).body(newActivity);
     }
 
-    // To create an endpoint that allows update all of atributte values a specific activity based its id.
+    // To create an endpoint that allows update all attribute values a specific activity based its id.
     @PutMapping("/{id}")
     public ResponseEntity<?> updateActivity(@Valid @RequestBody Activity activity, BindingResult result, @PathVariable String id) {
         // To handle of obligations of object attributes
@@ -95,7 +96,7 @@ public class ActivityController {
         return ResponseEntity.notFound().build();
     }
 
-    // To create a endpoint that allows deleting all of activities
+    // To create an endpoint that allows deleting all activities
     // and return response ok
     @DeleteMapping()
     public ResponseEntity<?> deleteAllOfActivity() {
