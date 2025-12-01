@@ -1,29 +1,38 @@
 openapi: 3.1.1
 info:
   title: Calorie Counter API
-  description: REST API used to manage activities with information such as name, calories, and category. It supports Create, Read, Update, and Delete operations for these activities. Additionally, it allows resetting the API, meaning all activities can be deleted.
-  version: 1.0.0
+  description: API for managing physical activities and calorie tracking.
+  version: v1.0.0
+  contact:
+    name: Alejandro Granados
+    email: alejandro.magb@gmail.com
+    url: https://github.com/aledelorbe
 
-servers:
-  - url: http://localhost:8080/api
-    description: Local server to develop
+tags:
+  - name: Activities
+    description: Endpoints related to manage the activities
 
 paths:
-  /activities:
+  /api/activities:
     get:
+      tags:
+        - Activities
       summary: Get all activities
+      description: Returns a list of all stored activities.
       responses:
         '200':
-          description: List of all activities
+          description: List of activities retrieved successfully.
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Activity'
-
     post:
+      tags:
+        - Activities
       summary: Create a new activity
+      description: Creates a new activity record.
       requestBody:
         required: true
         content:
@@ -32,82 +41,95 @@ paths:
               $ref: '#/components/schemas/ActivityInput'
       responses:
         '201':
-          description: Activity created
+          description: Activity created successfully.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Activity'
         '400':
-          description: Validation error
+          description: Validation error.
 
     delete:
+      tags:
+        - Activities
       summary: Delete all activities
+      description: Deletes all registered activities.
       responses:
         '200':
-          description: All activities deleted
+          description: All activities deleted successfully.
 
-  /activities/{id}:
-    get:
-      summary: Get an activity by ID
-      parameters:
-        - in: path
-          name: id
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Activity found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Activity'
-        '404':
-          description: Activity not found
-
-    put:
-      summary: Update an activity by ID
-      parameters:
-        - in: path
-          name: id
-          required: true
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
+  /api/activities/{id}:
+      get:
+        tags:
+          - Activities
+        summary: Get an activity by ID
+        description: Retrieves a specific activity by its unique ID.
+        parameters:
+          - name: id
+            in: path
+            required: true
             schema:
-              $ref: '#/components/schemas/ActivityInput'
-      responses:
-        '201':
-          description: Activity updated
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Activity'
-        '400':
-          description: Validation error
-        '404':
-          description: Activity not found
-
-    delete:
-      summary: Delete an activity by ID
-      parameters:
-        - in: path
-          name: id
+              type: string
+            description: Activity ID
+        responses:
+          '200':
+            description: Activity found.
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Activity'
+          '404':
+            description: Activity not found.
+      put:
+        tags:
+          - Activities
+        summary: Update an existing activity
+        description: Updates all fields of a specific activity by ID.
+        parameters:
+          - name: id
+            in: path
+            required: true
+            schema:
+              type: string
+            description: Activity ID
+        requestBody:
           required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Activity deleted
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Activity'
-        '404':
-          description: Activity not found
+                $ref: '#/components/schemas/ActivityInput'
+        responses:
+          '201':
+            description: Activity updated successfully.
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Activity'
+          '400':
+            description: Validation error.
+          '404':
+            description: Activity not found.
+      delete:
+        tags:
+          - Activities
+        summary: Delete an activity by ID
+        description: Deletes a specific activity by its ID.
+        parameters:
+          - name: id
+            in: path
+            required: true
+            schema:
+              type: string
+            description: Activity ID
+        responses:
+          '200':
+            description: Activity deleted successfully.
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Activity'
+          '404':
+            description: Activity not found.
 
 components:
   schemas:
@@ -116,30 +138,46 @@ components:
       properties:
         id:
           type: string
-        name:
-          type: string
-        calories:
-          type: number
-          format: float
+          description: Unique identifier of the activity.
+          example: "690516227df21160a524784a"
         category:
           type: string
+          description: Activity category (e.g., cardio, strength, etc.).
+          example: "Food"
+        name:
+          type: string
+          description: Name of the activity.
+          example: "Red Apple"
+        calories:
+          type: integer
+          format: int32
+          minimum: 1
+          description: Calories burned by performing the activity.
+          example: 150
       required:
-        - id
+        - category
         - name
         - calories
-        - category
 
     ActivityInput:
       type: object
       properties:
-        name:
-          type: string
-        calories:
-          type: number
-          format: float
         category:
           type: string
+          description: Activity category (e.g., cardio, strength, etc.).
+          example: "Food"
+        name:
+          type: string
+          description: Name of the activity.
+          example: "Red Apple"
+        calories:
+          type: integer
+          format: int32
+          minimum: 1
+          description: Calories burned by performing the activity.
+          example: 150
       required:
+        - category
         - name
         - calories
-        - category
+
