@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "51a8ccce-70ff-4d8a-83b2-f79004232932",
-		"name": "calorie counter",
+		"_postman_id": "98eae1b1-dad5-4a4c-8dbf-5339a6f2dc4c",
+		"name": "CALORIE COUNTER",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "46076399",
-		"_collection_link": "https://alejandro-4919656.postman.co/workspace/alejandro's-Workspace~01609ff9-2bd4-44a2-84b9-629489397dbc/collection/46076399-51a8ccce-70ff-4d8a-83b2-f79004232932?action=share&source=collection_link&creator=46076399"
+		"_exporter_id": "46944597",
+		"_collection_link": "https://telecoms-administrator-82446008-2957368.postman.co/workspace/MARTIN-ALEJANDRO-GRANADOS-BELLO~137692b1-9ef0-4fcb-840f-2d010a35161a/collection/46944597-98eae1b1-dad5-4a4c-8dbf-5339a6f2dc4c?action=share&source=collection_link&creator=46944597"
 	},
 	"item": [
 		{
@@ -13,12 +13,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8081/api/activities",
-					"protocol": "http",
+					"raw": "{{LOCAL_DOCKER}}/api/activities",
 					"host": [
-						"localhost"
+						"{{LOCAL_DOCKER}}"
 					],
-					"port": "8081",
 					"path": [
 						"api",
 						"activities"
@@ -34,7 +32,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \r\n}",
+					"raw": "{\r\n    \"category\": \"comida\",\r\n    \"name\": \"little caesars\",\r\n    \"calories\": 400\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -42,12 +40,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8081/api/activities",
-					"protocol": "http",
+					"raw": "{{LOCAL_DOCKER}}/api/activities",
 					"host": [
-						"localhost"
+						"{{LOCAL_DOCKER}}"
 					],
-					"port": "8081",
 					"path": [
 						"api",
 						"activities"
@@ -57,21 +53,19 @@
 			"response": []
 		},
 		{
-			"name": "activity",
+			"name": "activitiy",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8081/api/activities/6758971b8f617f46c0c5db7a",
-					"protocol": "http",
+					"raw": "{{LOCAL_DOCKER}}/api/activities/690516227df21160a524784a",
 					"host": [
-						"localhost"
+						"{{LOCAL_DOCKER}}"
 					],
-					"port": "8081",
 					"path": [
 						"api",
 						"activities",
-						"6758971b8f617f46c0c5db7a"
+						"690516227df21160a524784a"
 					]
 				}
 			},
@@ -92,16 +86,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8081/api/activities/6758971b8f617f46c0c5db7a",
-					"protocol": "http",
+					"raw": "{{LOCAL_DOCKER}}/api/activities/690516227df21160a524784a",
 					"host": [
-						"localhost"
+						"{{LOCAL_DOCKER}}"
 					],
-					"port": "8081",
 					"path": [
 						"api",
 						"activities",
-						"6758971b8f617f46c0c5db7a"
+						"690516227df21160a524784a"
 					]
 				}
 			},
@@ -113,16 +105,14 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8081/api/activities/6758971b8f617f46c0c5db7a",
-					"protocol": "http",
+					"raw": "{{LOCAL_DOCKER}}/api/activities/690516377df21160a524784b",
 					"host": [
-						"localhost"
+						"{{LOCAL_DOCKER}}"
 					],
-					"port": "8081",
 					"path": [
 						"api",
 						"activities",
-						"6758971b8f617f46c0c5db7a"
+						"690516377df21160a524784b"
 					]
 				}
 			},
@@ -134,12 +124,10 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8081/api/activities",
-					"protocol": "http",
+					"raw": "{{LOCAL_DOCKER}}/api/activities",
 					"host": [
-						"localhost"
+						"{{LOCAL_DOCKER}}"
 					],
-					"port": "8081",
 					"path": [
 						"api",
 						"activities"
