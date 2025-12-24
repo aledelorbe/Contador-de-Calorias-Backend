@@ -3,7 +3,7 @@ services:
   calorie-counter:
     container_name: calorie-counter
     ports:
-      - "7000:7000"
+      - "${LOCAL_DK_SERVER_PORT}:${LOCAL_DK_SERVER_PORT}"
     networks:
       - calorie-network
     image: calorie-image
@@ -15,9 +15,9 @@ services:
       - calorie-counter-db
 
   calorie-counter-db:
-    container_name: calorie-counter-db
+    container_name: ${LOCAL_DK_HOST_NAME}
     ports:
-      - "7001:27017"
+      - "${LOCAL_DK_DB_SERVER_PORT}:27017"
     networks:
       - calorie-network
     image:  mongodb/mongodb-community-server:7.0-ubi8
