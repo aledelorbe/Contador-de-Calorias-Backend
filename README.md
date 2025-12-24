@@ -76,88 +76,100 @@ Puedes ver una demo del proyecto en el siguiente enlace: [Contador de Calorías]
 
 ## Futuras mejoras
 
-Despliegue en aws.
-
-Despliegue automatico usando jenkins.
+- Desarrollar el servicio de catalogos de categoria de gastos.
+- Desarrollar las pruebas para este servicio.
+- Incorporar este servicio al swagger.
+- Crear el perfil dev para conectarse con mongoDb atlas.
+- Quizas meterle redis y el patron de diseño Cache-aside pattern para que se quede en cache el catalogo.
+- Actualizar el readme.
+- Despliegue en aws.
+- Despliegue automatico usando jenkins.
 
 ----
 
 # Calorie Counter (Backend)
 
-The **Calorie Counter** project is a backend application built with **Spring Boot** and **MongoDB**. Its main purpose is to manage activities with information such as name, calories, and category, providing a REST API to perform CRUD operations (Create, Read, Update, and Delete) on activities stored in a MongoDB database.
+The **Calorie Counter** project is a backend application developed with **Spring Boot** and **MongoDB**. Its goal is to manage activities with information such as name, calories, and category, providing a REST API to perform CRUD operations (Create, Read, Update, and Delete) on these activities stored in a MongoDB database.
 
 ## Technologies Used
 
 - **Spring Boot**: Framework for building Java applications. This project uses version `3.4.0`.
-  - **Jakarta Validation**: For input data validation.
-- **Java**: Main programming language. This project uses `JDK 17`.
-- **Maven**: For dependency management and project building.
+  - **Jakarta Validation**: For validating input data.
+- **Java**: Main programming language. This specific project uses `JDK 17`.
+- **Maven**: For dependency management and project build.
 - **MongoDB**: NoSQL database used to store activities.
-- **Postman**: Used to simulate client requests and test API endpoints.
-- **JUnit**: Unit testing framework used to verify method functionality.
-- **Mockito**: Mocking framework used to simulate dependencies and facilitate isolated unit testing.
-- **Swagger / OpenAPI**: Tool for documenting and interactively testing API endpoints.
-- **Docker**: Allows running the application in an isolated environment without manually configuring dependencies or versions.
+- **Postman**: Used to simulate a client making requests to the server and to test API endpoints.
+- **JUnit**: Unit testing framework used to verify the correct behavior of methods.
+- **Mockito**: Mocking framework for simulating dependencies and facilitating isolated unit tests.
+- **Swagger / OpenAPI**: Tool used to document and interactively test API endpoints.
+- **Docker**: Allows this application to run in an isolated environment without manually configuring dependencies or versions.
 
 ## Features
 
 ### Endpoints
 
-Organized routes to interact with the activities. Supported operations:
+Organized routes to interact with activities. Supported operations:
 - List all activities.
-- Retrieve a specific activity by its ID.
-- Create new activities by providing the name, category, and calorie count.
+- Get a specific activity by its ID.
+- Create new activities. Requires entering the activity name, category, and calorie count.
 - Update existing activities.
 - Delete individual activities.
-- Server reset: deletes all activities from the database.
+- Server reset: Removes all activities from the database.
 
 ### Database Manager
 
-- Integrated with MongoDB for data handling.
-- The NoSQL database has a single collection that manages activity information.
+- Integration with MongoDB for data manipulation.
+- The NoSQL database contains a single collection responsible for managing activity information.
 
 ### Validations
 
 The following validations are applied:
-- The **name** and **category** fields cannot be empty or contain only whitespace.
-- The **calories** attribute must be greater than zero.
+- The **name** and **category** attributes of an activity cannot be empty or contain only whitespace.
+- The **calories** attribute cannot be less than or equal to zero.
 
 ### Design Patterns
 
-- The project follows the **MVC (Model-View-Controller)** architectural pattern to separate code into distinct layers.
+- The architectural design pattern **MVC** is used to separate project code into different layers.
 
 ### Docker
 
-This project uses Docker to create an isolated and reproducible runtime environment, ensuring consistent behavior across different systems.
+This project uses Docker to create an isolated and reproducible execution environment, ensuring consistent behavior across different systems.
 
 Relevant files:
 
 - `Dockerfile`: Defines the base image and how the project environment is built.
 - `docker-compose.yml`: Orchestrates the services (API and database) to simplify local execution.
-- `.env`: Contains environment variables used by Docker (not included in the repository for security reasons).
+- `.env`: Contains environment variables used by Docker (not included in the repository for security).
 
 ## Project Structure
 
 ### Application Source Code
 
-- `controllers/`: Contains classes that handle HTTP requests and define the API endpoints.
-- `services/`: Contains business logic classes.
-- `repositories/`: Contains interfaces that extend data-handling repositories.
-- `entities/`: Contains classes mapped to their corresponding MongoDB collections.
+- `controllers/`: Contains classes that handle HTTP requests and define API endpoints.
+- `services/`: Contains classes that implement business logic.
+- `repositories/`: Contains interfaces that extend data-handling interfaces.
+- `entities/`: Contains classes mapped to their corresponding collections in the database.
 
 ### Test Code
 
-- `controllers/`: Contains test classes validating controller method behavior.
-- `services/`: Contains test classes verifying service layer functionality.
-- `data/`: Stores mock data classes used during test execution.
+- `controllers/`: Contains test classes that validate controller method behavior.
+- `services/`: Contains test classes that verify the correct functionality of service methods.
+- `data/`: Contains mock data classes used during test execution.
 
 ## Demo
 
-You can view a demo of the project here: [Calorie Counter](https://deft-kataifi-58f6e5.netlify.app/).
+You can see a demo of the project at the following link:  
+[Calorie Counter](https://deft-kataifi-58f6e5.netlify.app/)
 
-**Note:** The demo is for presentation purposes only and is not connected to the backend.
+**Note:** The project demo is for demonstration purposes only. It is not connected to the backend.
 
 ## Future Improvements
 
-- Deployment on AWS.  
-- Automated deployment using Jenkins.
+- Develop the category catalog service.
+- Create tests for this service.
+- Add this service to Swagger.
+- Create the `dev` profile to connect to MongoDB Atlas.
+- Possibly add Redis and apply the Cache-aside pattern to cache the catalog.
+- Update the README.
+- Deploy on AWS.
+- Set up automatic deployment using Jenkins.
