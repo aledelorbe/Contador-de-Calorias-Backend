@@ -6,9 +6,9 @@ import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.annotation.Id;
 
 
-// In mongoDb the name of this collection is 'expese_categories' but in this project
+// In mongoDb the name of this collection is 'expense_categories' but in this project
 // the name of this class is 'ExpenseCategory'
-@Document(collection = "expese_categories")
+@Document(collection = "expense_categories")
 public class ExpenseCategory {
 
     // Mapping of class attributes with collection fields in mongoDb
@@ -18,4 +18,27 @@ public class ExpenseCategory {
     @Field(value = "category_name")
     private String categoryName;
 
+    public ExpenseCategory() {
+    }
+
+    public ExpenseCategory(String id, String categoryName) {
+        this.id = id;
+        this.categoryName = categoryName;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
 }
