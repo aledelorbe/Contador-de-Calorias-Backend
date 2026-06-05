@@ -11,8 +11,12 @@ info:
 tags:
   - name: Activities
     description: Endpoints related to manage the activities
+  - name: Catalogs
+    description: Endpoints related to catalogs
 
 paths:
+
+  # Activity controller -----------------------------
   /api/activities:
     get:
       tags:
@@ -131,6 +135,23 @@ paths:
           '404':
             description: Activity not found.
 
+  # Catalogs controller -----------------------------
+  /api/expense-categories:
+    get:
+      tags:
+        - Catalogs
+      summary: Get all expense categories
+      description: Returns a list of expense categories.
+      responses:
+        '200':
+          description: List of expense categories successfully.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ExpenseCategory'
+
 components:
   schemas:
     Activity:
@@ -180,4 +201,15 @@ components:
         - category
         - name
         - calories
-
+      
+    ExpenseCategory:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the expense category.
+          example: "22349823049234kjasidjfmioanuioner3"
+        category_name:
+          type: string
+          description: Expense category name (e.g., exercise, food).
+          example: "Food"
