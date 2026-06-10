@@ -22,7 +22,7 @@ public class ExpenseCategoryServiceImp implements ExpenseCategoryService {
     // To list all activities (records) in the collection 'activities'
     @Override
     @Transactional(readOnly = true)
-    public List<ExpenseCategory> findAll(){
+    public List<ExpenseCategory> getCategoriesDb(){
         return repository.findAll();
     }
 
