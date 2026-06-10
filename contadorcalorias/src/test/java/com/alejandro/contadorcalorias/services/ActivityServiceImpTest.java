@@ -32,7 +32,8 @@ class ActivityServiceImpTest {
     @InjectMocks
     ActivityServiceImp service;
 
-    // To test the method findAll
+    
+    // To test the findAll method 
     @Test
     void findAllTest() {
 
@@ -53,7 +54,7 @@ class ActivityServiceImpTest {
         verify(repository).findAll();
     }
 
-    // To test the method findById when we use an existing id
+    // To test the findById method when we use an existing id
     @Test
     void findByIdExistingIdTest() {
 
@@ -73,7 +74,7 @@ class ActivityServiceImpTest {
         verify(repository).findById(argThat(new CustomCondition(ActivityData.idsValid, true)));
     }
 
-    // To test the method findById when we use an inexisting id
+    // To test the findById method when we use an inexisting id
     @Test
     void findByIdInexistingIdTest() {
 
@@ -92,7 +93,7 @@ class ActivityServiceImpTest {
         verify(repository).findById(argThat(new CustomCondition(ActivityData.idsValid, false)));
     }
     
-    // To test the method save
+    // To test the save method 
     @Test
     void saveTest() {
 
@@ -111,7 +112,7 @@ class ActivityServiceImpTest {
         verify(repository).save(any(Activity.class));
     }
 
-    // To test the method update when we use an existing id
+    // To test the update method when we use an existing id
     @Test
     void updateExistingIdTest() {
 
@@ -134,7 +135,7 @@ class ActivityServiceImpTest {
         verify(repository).save(any(Activity.class));
     }
 
-    // To test the method update when we use an inexisting id
+    // To test the update method when we use an inexisting id
     @Test
     void updateInexistingIdTest() {
 
@@ -155,7 +156,7 @@ class ActivityServiceImpTest {
         verify(repository, never()).save(any(Activity.class));
     }
 
-    // To test the method delete when we use an existing id
+    // To test the delete method when we use an existing id
     @Test
     void deleteExistingIdTest() {
 
@@ -176,7 +177,7 @@ class ActivityServiceImpTest {
         verify(repository).deleteById(argThat(new CustomCondition(ActivityData.idsValid, true)));
     }
 
-    // To test the method delete when we use an inexisting id
+    // To test the delete method when we use an inexisting id
     @Test
     void deleteInexistingIdTest() {
 
@@ -197,7 +198,7 @@ class ActivityServiceImpTest {
         verify(repository, never()).deleteById(argThat(new CustomCondition(ActivityData.idsValid, false)));
     }
 
-    // To test the method deleteAll
+    // To test the deleteAll method
     @Test
     void deleteAllTest() {
 

@@ -1,9 +1,11 @@
 package com.alejandro.contadorcalorias.data;
 
+
 import java.util.Arrays;
 import java.util.List;
 
 import com.alejandro.contadorcalorias.entities.Activity;
+
 
 // The class that contains the data to be mocked in the service methods
 public class ActivityData {
