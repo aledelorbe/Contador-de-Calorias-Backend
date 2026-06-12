@@ -1,0 +1,26 @@
+[
+  {
+    "id": "1000000",
+    "category": "food",
+    "name": "Chicken Breast",
+    "calories": 165
+  },
+  {
+    "id": "2000000",
+    "category": "food",
+    "name": "Apple",
+    "calories": 95
+  },
+  {
+    "id": "3000000",
+    "category": "exercise",
+    "name": "Running",
+    "calories": 300
+  },
+  {
+    "id": "4000000",
+    "category": "exercise",
+    "name": "Cycling",
+    "calories": 250
+  }
+]
