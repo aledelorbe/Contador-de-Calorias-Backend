@@ -7,19 +7,19 @@ import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.containers.MongoDBContainer;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
 
 
-@Testcontainers
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public abstract class AbstractMongoIntegrationTest {
 
-    @Container
-    static MongoDBContainer mongo = new MongoDBContainer("mongo:7.0");
+    static final MongoDBContainer mongo = new MongoDBContainer("mongo:7.0");
 
-    @Container
-    static GenericContainer<?> redis = new GenericContainer<>("redis:7").withExposedPorts(6379);
+    static final GenericContainer<?> redis = new GenericContainer<>("redis:7").withExposedPorts(6379);
+
+    static {
+        mongo.start();
+        redis.start();
+    }
 
     @DynamicPropertySource
     static void configureMongoProperties(DynamicPropertyRegistry registry) {
