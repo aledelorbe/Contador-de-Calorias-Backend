@@ -22,7 +22,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 
-import com.alejandro.contadorcalorias.entities.ExpenseCategory;
+import com.alejandro.contadorcalorias.entities.ActivityCategory;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -51,7 +51,7 @@ class RedisCacheRepositoryTest {
     void shouldReturnObjectWhenKeyExistsInRedis() throws Exception {
 
         // Given
-        String key = "expenseCategories";
+        String key = "activityCategories";
         String json = """
             [
                 {
@@ -60,8 +60,8 @@ class RedisCacheRepositoryTest {
                 }
             ]
             """;
-        List<ExpenseCategory> expectedCategories = List.of(
-                new ExpenseCategory()
+        List<ActivityCategory> expectedCategories = List.of(
+                new ActivityCategory()
         );
         when(stringRedisTemplate.opsForValue()).thenReturn(valueOperations);
         when(valueOperations.get(key)).thenReturn(json);
@@ -70,10 +70,10 @@ class RedisCacheRepositoryTest {
                 
 
         // Then
-        List<ExpenseCategory> result =
+        List<ActivityCategory> result =
                 redisCacheRepository.get(
                     key,
-                    new TypeReference<List<ExpenseCategory>>() {}
+                    new TypeReference<List<ActivityCategory>>() {}
                 );
 
         // Then
@@ -88,15 +88,15 @@ class RedisCacheRepositoryTest {
     void shouldReturnNullWhenKeyDoesNotExistInRedis() {
 
         // Given
-        String key = "expenseCategories";
+        String key = "activityCategories";
         when(stringRedisTemplate.opsForValue()).thenReturn(valueOperations);
         when(valueOperations.get(key)).thenReturn(null);
 
         // When
-        List<ExpenseCategory> result =
+        List<ActivityCategory> result =
                 redisCacheRepository.get(
                         key,
-                        new TypeReference<List<ExpenseCategory>>() {}
+                        new TypeReference<List<ActivityCategory>>() {}
                 );
 
         // Then
@@ -111,7 +111,7 @@ class RedisCacheRepositoryTest {
     void shouldThrowRuntimeExceptionWhenDeserializationFails() throws Exception {
 
         // Given
-        String key = "expenseCategories";
+        String key = "activityCategories";
         String json = "invalid-json";
 
         when(valueOperations.get(key)).thenReturn(json);
@@ -124,7 +124,7 @@ class RedisCacheRepositoryTest {
                 RuntimeException.class,
                 () -> redisCacheRepository.get(
                         key,
-                        new TypeReference<List<ExpenseCategory>>() {}
+                        new TypeReference<List<ActivityCategory>>() {}
                 )
         );
 
@@ -139,7 +139,7 @@ class RedisCacheRepositoryTest {
     void shouldSaveValueInRedisSuccessfully() throws Exception {
 
         // Given
-        String key = "expenseCategories";
+        String key = "activityCategories";
         long ttl = 60;
         List<String> categories = List.of("Food", "Transport");
         String json = """
@@ -167,7 +167,7 @@ class RedisCacheRepositoryTest {
     void shouldThrowRuntimeExceptionWhenSerializationFails() throws Exception {
 
         // Given
-        String key = "expenseCategories";
+        String key = "activityCategories";
         long ttl = 60;
 
         List<String> categories = List.of("Food");

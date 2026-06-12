@@ -1,4 +1,4 @@
-package com.alejandro.contadorcalorias.services;
+package com.alejandro.contadorcalorias.services.cache;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -19,29 +19,29 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.alejandro.contadorcalorias.data.ExpenseCategoryData;
-import com.alejandro.contadorcalorias.entities.ExpenseCategory;
+import com.alejandro.contadorcalorias.data.ActivityCategoryData;
+import com.alejandro.contadorcalorias.entities.ActivityCategory;
 import com.alejandro.contadorcalorias.repositories.RedisCacheRepository;
-import com.alejandro.contadorcalorias.services.cache.ExpenseCategoryCacheService;
+import com.alejandro.contadorcalorias.services.ActivityCategoryService;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 
 
 @ExtendWith(MockitoExtension.class)
-class ExpenseCategoryCacheServiceTest {
+class ActivityCategoryCacheServiceTest {
     
     // To create the mocks
     @Mock
-    private ExpenseCategoryService expenseCategoryService;
+    private ActivityCategoryService activityCategoryService;
 
     @Mock
     private RedisCacheRepository redisCacheRepository;
 
     // To create a service object with the injection of a mock
     @InjectMocks
-    private ExpenseCategoryCacheService expenseCategoryCacheService;
+    private ActivityCategoryCacheService activityCategoryCacheService;
 
-    String keyExpenseCategories = "expenseCategories";
+    String keyActivityCategories = "activityCategories";
 
 
     // To test the getCategories method when the data return from cache with redis
@@ -49,24 +49,24 @@ class ExpenseCategoryCacheServiceTest {
     void shouldReturnCategoriesFromCache() {
 
         // Given
-        List<ExpenseCategory> cachedCategories = ExpenseCategoryData.createExpenseCategories001();
+        List<ActivityCategory> cachedCategories = ActivityCategoryData.createActivityCategories001();
 
         when(redisCacheRepository.get(
-                eq(keyExpenseCategories),
+                eq(keyActivityCategories),
                 any(TypeReference.class)))
                 .thenReturn(cachedCategories);
 
         // When
-        List<ExpenseCategory> result = expenseCategoryCacheService.getCategories();
+        List<ActivityCategory> result = activityCategoryCacheService.getCategories();
 
         // Then
         assertEquals(cachedCategories, result);
 
         verify(redisCacheRepository).get(
-                eq(keyExpenseCategories),
+                eq(keyActivityCategories),
                 any(TypeReference.class));
 
-        verifyNoInteractions(expenseCategoryService);
+        verifyNoInteractions(activityCategoryService);
 
         verify(redisCacheRepository, never())
                 .set(anyString(), any(), anyLong());
@@ -77,31 +77,31 @@ class ExpenseCategoryCacheServiceTest {
     void shouldReturnCategoriesFromDatabaseAndSaveInCache() {
 
         // Given
-        List<ExpenseCategory> dbCategories = ExpenseCategoryData.createExpenseCategories001();
+        List<ActivityCategory> dbCategories = ActivityCategoryData.createActivityCategories001();
 
         when(redisCacheRepository.get(
-                eq(keyExpenseCategories),
+                eq(keyActivityCategories),
                 any(TypeReference.class)))
                 .thenReturn(null);
 
-        when(expenseCategoryService.getCategoriesDb())
+        when(activityCategoryService.getCategoriesDb())
                 .thenReturn(dbCategories);
 
         // When
-        List<ExpenseCategory> result = expenseCategoryCacheService.getCategories();
+        List<ActivityCategory> result = activityCategoryCacheService.getCategories();
 
         // Then
         assertEquals(dbCategories, result);
 
         verify(redisCacheRepository).get(
-                eq(keyExpenseCategories),
+                eq(keyActivityCategories),
                 any(TypeReference.class));
 
-        verify(expenseCategoryService)
+        verify(activityCategoryService)
                 .getCategoriesDb();
 
         verify(redisCacheRepository)
-                .set(keyExpenseCategories, dbCategories, 15L);
+                .set(keyActivityCategories, dbCategories, 15L);
     }
 
 }

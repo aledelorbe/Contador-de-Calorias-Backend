@@ -12,21 +12,21 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.alejandro.contadorcalorias.data.ExpenseCategoryData;
-import com.alejandro.contadorcalorias.entities.ExpenseCategory;
-import com.alejandro.contadorcalorias.repositories.ExpenseCategoryRepository;
+import com.alejandro.contadorcalorias.data.ActivityCategoryData;
+import com.alejandro.contadorcalorias.entities.ActivityCategory;
+import com.alejandro.contadorcalorias.repositories.ActivityCategoryRepository;
 
 
 @ExtendWith(MockitoExtension.class)
-class ExpenseCategoryServiceImpTest {
+class ActivityCategoryServiceImpTest {
 
     // To create a mock
     @Mock
-    ExpenseCategoryRepository expenseCategoryRepository;
+    ActivityCategoryRepository activityCategoryRepository;
 
     // To create a service object with the injection of a mock
     @InjectMocks
-    ExpenseCategoryServiceImp service;
+    ActivityCategoryServiceImp service;
 
 
     // To test the getCategoriesDb method
@@ -34,19 +34,19 @@ class ExpenseCategoryServiceImpTest {
     void findAllTest() {
 
         // Given
-        when(expenseCategoryRepository.findAll()).thenReturn(ExpenseCategoryData.createExpenseCategories001());
+        when(activityCategoryRepository.findAll()).thenReturn(ActivityCategoryData.createActivityCategories001());
 
         // when
-        List<ExpenseCategory> expenseCategories = service.getCategoriesDb();
+        List<ActivityCategory> activityCategories = service.getCategoriesDb();
 
         // then
-        assertNotNull(expenseCategories);
-        assertEquals(2, expenseCategories.size());
+        assertNotNull(activityCategories);
+        assertEquals(2, activityCategories.size());
 
-        assertEquals("0000002", expenseCategories.get(1).getId());
-        assertEquals("exercise", expenseCategories.get(1).getCategoryName());
+        assertEquals("0000002", activityCategories.get(1).getId());
+        assertEquals("exercise", activityCategories.get(1).getCategoryName());
 
-        verify(expenseCategoryRepository).findAll();
+        verify(activityCategoryRepository).findAll();
     }
 
 }

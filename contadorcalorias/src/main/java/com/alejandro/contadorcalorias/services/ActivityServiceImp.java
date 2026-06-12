@@ -1,5 +1,6 @@
 package com.alejandro.contadorcalorias.services;
 
+
 import java.util.List;
 import java.util.Optional;
 
@@ -9,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.alejandro.contadorcalorias.entities.Activity;
 import com.alejandro.contadorcalorias.repositories.ActivityRepository;
+
 
 @Service
 public class ActivityServiceImp implements ActivityService{
@@ -82,4 +84,5 @@ public class ActivityServiceImp implements ActivityService{
     public void deleteAll() {
         repository.deleteAll();
     }
+
 }

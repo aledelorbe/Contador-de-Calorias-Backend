@@ -6,39 +6,39 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.alejandro.contadorcalorias.entities.ExpenseCategory;
+import com.alejandro.contadorcalorias.entities.ActivityCategory;
 import com.alejandro.contadorcalorias.repositories.RedisCacheRepository;
-import com.alejandro.contadorcalorias.services.ExpenseCategoryService;
+import com.alejandro.contadorcalorias.services.ActivityCategoryService;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 
 
 @Service
-public class ExpenseCategoryCacheService {
+public class ActivityCategoryCacheService {
     
 
     // To Inject the service dependency
     @Autowired
-    private ExpenseCategoryService expenseCategoryService;
+    private ActivityCategoryService activityCategoryService;
 
     @Autowired
     private RedisCacheRepository redisCacheRepository;
 
 
-    public List<ExpenseCategory> getCategories() {
+    public List<ActivityCategory> getCategories() {
 
-        String key = "expenseCategories";
+        String key = "activityCategories";
 
-        List<ExpenseCategory> cached = redisCacheRepository.get(
+        List<ActivityCategory> cached = redisCacheRepository.get(
             key,
-            new TypeReference<List<ExpenseCategory>>() {}
+            new TypeReference<List<ActivityCategory>>() {}
         );
 
         if (cached != null) {
             return cached;
         }
 
-        List<ExpenseCategory> fromDb = expenseCategoryService.getCategoriesDb();
+        List<ActivityCategory> fromDb = activityCategoryService.getCategoriesDb();
 
         redisCacheRepository.set(key, fromDb, 15L);
 

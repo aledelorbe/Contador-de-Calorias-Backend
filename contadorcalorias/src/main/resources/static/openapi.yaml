@@ -136,21 +136,21 @@ paths:
             description: Activity not found.
 
   # Catalogs controller -----------------------------
-  /api/expense-categories:
+  /api/activity-categories:
     get:
       tags:
         - Catalogs
-      summary: Get all expense categories
-      description: Returns a list of expense categories.
+      summary: Get all activity categories
+      description: Returns a list of activity categories.
       responses:
         '200':
-          description: List of expense categories successfully.
+          description: List of activity categories successfully.
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/ExpenseCategory'
+                  $ref: '#/components/schemas/ActivityCategory'
 
 components:
   schemas:
@@ -202,14 +202,14 @@ components:
         - name
         - calories
       
-    ExpenseCategory:
+    ActivityCategory:
       type: object
       properties:
         id:
           type: string
-          description: Unique identifier of the expense category.
+          description: Unique identifier of the activity category.
           example: "22349823049234kjasidjfmioanuioner3"
         category_name:
           type: string
-          description: Expense category name (e.g., exercise, food).
+          description: Activity category name (e.g., exercise, food).
           example: "Food"

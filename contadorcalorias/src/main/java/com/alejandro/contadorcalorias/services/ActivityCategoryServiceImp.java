@@ -7,22 +7,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.alejandro.contadorcalorias.entities.ExpenseCategory;
-import com.alejandro.contadorcalorias.repositories.ExpenseCategoryRepository;
+import com.alejandro.contadorcalorias.entities.ActivityCategory;
+import com.alejandro.contadorcalorias.repositories.ActivityCategoryRepository;
 
 
 @Service
-public class ExpenseCategoryServiceImp implements ExpenseCategoryService {
+public class ActivityCategoryServiceImp implements ActivityCategoryService {
     
     // To inject the repository dependency.
     @Autowired
-    private ExpenseCategoryRepository repository;
+    private ActivityCategoryRepository repository;
 
 
     // To list all activities (records) in the collection 'activities'
     @Override
     @Transactional(readOnly = true)
-    public List<ExpenseCategory> getCategoriesDb(){
+    public List<ActivityCategory> getCategoriesDb(){
         return repository.findAll();
     }
 

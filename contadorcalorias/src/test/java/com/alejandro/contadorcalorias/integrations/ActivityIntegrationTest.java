@@ -87,7 +87,7 @@ public class ActivityIntegrationTest extends AbstractMongoIntegrationTest {
     void postActivityIntegrationTest() {
 
         // Given
-        Activity activityInsert = new Activity(null, "Food", "Cheescake", 600);
+        Activity activityInsert = new Activity(null, "Food", " Cheescake ", 600);
 
         // When
         ResponseEntity<Activity> response = testRestTemplate.postForEntity(BASE_URL, activityInsert, Activity.class);

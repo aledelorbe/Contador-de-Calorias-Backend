@@ -16,59 +16,59 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ResourceUtils;
 
-import com.alejandro.contadorcalorias.entities.ExpenseCategory;
-import com.alejandro.contadorcalorias.repositories.ExpenseCategoryRepository;
+import com.alejandro.contadorcalorias.entities.ActivityCategory;
+import com.alejandro.contadorcalorias.repositories.ActivityCategoryRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 
-class ExpenseCategoryIntegrationTest extends AbstractMongoIntegrationTest {
+class ActivityCategoryIntegrationTest extends AbstractMongoIntegrationTest {
 
     // To inject the component of testRestTemplate
     @Autowired
     private TestRestTemplate testRestTemplate;
 
     @Autowired
-    private ExpenseCategoryRepository expenseCategoryRepository;
+    private ActivityCategoryRepository activityCategoryRepository;
 
     @Autowired
     private ObjectMapper objectMapper;
 
-    private static final String BASE_URL = "/api/expense-categories";
+    private static final String BASE_URL = "/api/activity-categories";
 
     @BeforeEach
     void setUp() throws Exception {
 
-        expenseCategoryRepository.deleteAll();
+        activityCategoryRepository.deleteAll();
 
         File file =
             ResourceUtils.getFile(
-                "classpath:expenseCategories.json"
+                "classpath:activityCategories.json"
             );
 
-        List<ExpenseCategory> categories =
+        List<ActivityCategory> categories =
             objectMapper.readValue(
                 file,
-                new TypeReference<List<ExpenseCategory>>() {}
+                new TypeReference<List<ActivityCategory>>() {}
             );
 
-        expenseCategoryRepository.saveAll(categories);
+        activityCategoryRepository.saveAll(categories);
     }
 
-    // To test the expenseCategories endpoint
+    // To test the activityCategories endpoint
     @Test
-    void expenseCategoriesIntegrationTest() {
+    void activityCategoriesIntegrationTest() {
 
         // When
-        ResponseEntity<ExpenseCategory[]> response  = testRestTemplate.getForEntity(BASE_URL, ExpenseCategory[].class);
-        List<ExpenseCategory> ExpenseCategories = Arrays.asList(response.getBody()); 
+        ResponseEntity<ActivityCategory[]> response  = testRestTemplate.getForEntity(BASE_URL, ActivityCategory[].class);
+        List<ActivityCategory> ActivityCategories = Arrays.asList(response.getBody()); 
 
         // Then
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertFalse(ExpenseCategories.isEmpty());
-        assertEquals(2, ExpenseCategories.size());
-        assertEquals("0000001", ExpenseCategories.get(0).getId());
-        assertEquals("food", ExpenseCategories.get(0).getCategoryName());
+        assertFalse(ActivityCategories.isEmpty());
+        assertEquals(2, ActivityCategories.size());
+        assertEquals("0000001", ActivityCategories.get(0).getId());
+        assertEquals("food", ActivityCategories.get(0).getCategoryName());
 
     }
     

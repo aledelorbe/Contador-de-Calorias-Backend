@@ -3,8 +3,8 @@ package com.alejandro.contadorcalorias.controllers;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import com.alejandro.contadorcalorias.entities.ExpenseCategory;
-import com.alejandro.contadorcalorias.services.cache.ExpenseCategoryCacheService;
+import com.alejandro.contadorcalorias.entities.ActivityCategory;
+import com.alejandro.contadorcalorias.services.cache.ActivityCategoryCacheService;
 
 import java.util.List;
 
@@ -17,23 +17,23 @@ import org.slf4j.LoggerFactory;
 
 
 @RestController // To create an api rest.
-@RequestMapping("/api/expense-categories") // To create a base path.
-public class ExpenseCategoryController {
+@RequestMapping("/api/activity-categories") // To create a base path.
+public class ActivityCategoryController {
     
     // To Inject the service dependency
     @Autowired
-    private ExpenseCategoryCacheService expenseCategoryCacheService;
+    private ActivityCategoryCacheService activityCategoryCacheService;
 
-    private static final Logger logger = LoggerFactory.getLogger(ExpenseCategoryController.class);
+    private static final Logger logger = LoggerFactory.getLogger(ActivityCategoryController.class);
 
 
     // To create an endpoint that allows invocating the getCategories method.
     @GetMapping
-    public List<ExpenseCategory> expenseCategories() {
+    public List<ActivityCategory> activityCategories() {
 
         long startTime = System.nanoTime();
 
-        List<ExpenseCategory> categories = expenseCategoryCacheService.getCategories();
+        List<ActivityCategory> categories = activityCategoryCacheService.getCategories();
 
         long durationMs = (System.nanoTime() - startTime) / 1_000_000;
 

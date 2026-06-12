@@ -17,15 +17,15 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
-import com.alejandro.contadorcalorias.data.ExpenseCategoryData;
-import com.alejandro.contadorcalorias.entities.ExpenseCategory;
-import com.alejandro.contadorcalorias.services.cache.ExpenseCategoryCacheService;
+import com.alejandro.contadorcalorias.data.ActivityCategoryData;
+import com.alejandro.contadorcalorias.entities.ActivityCategory;
+import com.alejandro.contadorcalorias.services.cache.ActivityCategoryCacheService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
-@WebMvcTest(ExpenseCategoryController.class)
+@WebMvcTest(ActivityCategoryController.class)
 // @Import(TestConfig.class)
-class ExpenseCategoryControllerTest {
+class ActivityCategoryControllerTest {
 
     // To inject the dependency that allows for mocking HTTP requests
     @Autowired
@@ -34,20 +34,20 @@ class ExpenseCategoryControllerTest {
     // To inject the dependency that represents the service to mock
     // @Autowired
     @MockitoBean
-    private ExpenseCategoryCacheService expenseCategoryCacheService;
+    private ActivityCategoryCacheService activityCategoryCacheService;
 
     @Autowired
     private ObjectMapper objectMapper;
 
-    private static final String BASE_URL = "/api/expense-categories";
+    private static final String BASE_URL = "/api/activity-categories";
 
 
-    // To test the endpoint getExpenseCategories
+    // To test the endpoint getActivityCategories
     @Test
-    void getExpenseCategoriesTest () throws Exception {
+    void getActivityCategoriesTest () throws Exception {
 
         // Given
-        when(expenseCategoryCacheService.getCategories()).thenReturn(ExpenseCategoryData.createExpenseCategories001());
+        when(activityCategoryCacheService.getCategories()).thenReturn(ActivityCategoryData.createActivityCategories001());
 
         // When
         MvcResult result = mockMvc.perform(get(BASE_URL))
@@ -64,15 +64,15 @@ class ExpenseCategoryControllerTest {
 
         // Convert the response to a list of objects
         String jsonString = result.getResponse().getContentAsString();
-        List<ExpenseCategory> expenseCategories = Arrays.asList(objectMapper.readValue(jsonString, ExpenseCategory[].class));
+        List<ActivityCategory> activityCategories = Arrays.asList(objectMapper.readValue(jsonString, ActivityCategory[].class));
 
-        assertFalse(expenseCategories.isEmpty());
-        assertEquals(2, expenseCategories.size());
+        assertFalse(activityCategories.isEmpty());
+        assertEquals(2, activityCategories.size());
 
-        assertEquals("food", expenseCategories.get(0).getCategoryName());
-        assertEquals("exercise", expenseCategories.get(1).getCategoryName());
+        assertEquals("food", activityCategories.get(0).getCategoryName());
+        assertEquals("exercise", activityCategories.get(1).getCategoryName());
 
-        verify(expenseCategoryCacheService).getCategories();
+        verify(activityCategoryCacheService).getCategories();
     } 
 
 }
