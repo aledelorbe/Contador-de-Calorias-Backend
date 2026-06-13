@@ -45,5 +45,4 @@ public class ActivityCategoryCacheService {
         return fromDb;
     }
 
-
 }
