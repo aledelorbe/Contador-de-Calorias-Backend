@@ -102,6 +102,7 @@ Puedes ver una demo del proyecto en el siguiente enlace: [Contador de Calorías]
 
 ## Futuras mejoras
 
+- renombrar el nombre del archivo de la clase 'ActivityCategoryServiceImpTest'.
 - Crear el perfil dev para conectarse con mongoDb atlas.
 - Despliegue en aws.
 - Despliegue automatico usando jenkins.
