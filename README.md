@@ -73,9 +73,9 @@ Este proyecto utiliza Docker para crear un entorno de ejecución aislado y repro
 
 Archivos relevantes:
 
-- `Dockerfile`: define la imagen base y cómo se construye el entorno del proyecto.
-- `docker-compose.yml`: orquesta los servicios (API y base de datos) para facilitar la ejecución local.
-- `.env`: contiene variables de entorno usadas por Docker (no se incluye en el repositorio por seguridad).
+- `Dockerfile`: Define la imagen base y cómo se construye el entorno del proyecto.
+- `docker-compose.yml`: Orquesta los servicios (aplicación, base de datos y Redis) para facilitar la ejecución local.
+- `.env`: Contiene variables de entorno usadas por Docker (no se incluyen en el repositorio por seguridad).
 
 ## Estructura del Proyecto
 
